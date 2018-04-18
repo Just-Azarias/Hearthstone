@@ -1,3 +1,4 @@
+package jeu;
 
 /**
  * Le plateau gère toute la partie, notamment le début et la fin de partie. Il sait qui est le joueur

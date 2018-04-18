@@ -1,4 +1,4 @@
-
+package jeu;
 
 /**
  * Une carte du jeu peut être
