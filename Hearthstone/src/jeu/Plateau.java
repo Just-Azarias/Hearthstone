@@ -1,6 +1,11 @@
 package jeu;
 
 public class Plateau implements IPlateau {
+	private IJoueur joueur1;
+	private IJoueur joueur2;
+	private boolean tourJoueur1;
+	private boolean tourJoueur2;
+	private boolean partie;
 
 	@Override
 	public void ajouterJoueur(IJoueur joueur) throws HearthstoneException {
