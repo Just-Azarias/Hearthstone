@@ -9,50 +9,71 @@ public class Plateau implements IPlateau {
 
 	@Override
 	public void ajouterJoueur(IJoueur joueur) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (this.joueur1==null) this.joueur1= joueur;
+		else if (this.joueur2==null) this.joueur2=joueur;
+		else new HearthstoneException("2 Joueurs deja enregistre");
 	}
 
 	@Override
 	public IJoueur getJoueurCourant() {
-		// TODO Auto-generated method stub
-		return null;
+		if (this.tourJoueur1) return this.joueur1;
+		else return this.joueur2;
 	}
 
 	@Override
 	public void setJoueurCourant(IJoueur joueur) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (joueur.equals(this.joueur1)) {
+			this.tourJoueur1=true;
+			this.tourJoueur2=false;
+		}
+		else if (joueur.equals(this.joueur2)) {
+			this.tourJoueur1=false;
+			this.tourJoueur2=true;
+		}
+		else new HearthstoneException("joueur inexistant");
 	}
 
 	@Override
 	public IJoueur getAdversaire(IJoueur joueur) throws HearthstoneException {
-		// TODO Auto-generated method stub
+		if (joueur.equals(this.joueur1)) return this.joueur2;
+		else if (joueur.equals(this.joueur2)) return this.joueur1;
+		else new HearthstoneException("joueur inexistant");
 		return null;
 	}
 
 	@Override
 	public void demarrerPartie() throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		this.partie=true;
 	}
 
 	@Override
 	public boolean estDemarree() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.partie;
 	}
 
 	@Override
 	public void finTour(IJoueur joueur) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (joueur.equals(this.joueur1)) {
+			this.tourJoueur1=false;
+			this.tourJoueur2=true;
+		}
+		else if (joueur.equals(this.joueur2)) {
+			this.tourJoueur1=true;
+			this.tourJoueur2=false;
+		}
+		else new HearthstoneException("joueur inexistant");
 	}
 
 	@Override
 	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		/*if (joueur.equals(this.joueur1)) {
+			this.joueur2.getHeros().
+		}
+		else if (joueur.equals(this.joueur2)) {
+			this.tourJoueur1=true;
+			this.tourJoueur2=false;
+		}
+		else new HearthstoneException("joueur inexistant");*/
 	}
 
 }
