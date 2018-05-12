@@ -1,4 +1,7 @@
-package jeu;
+package carte;
+
+import jeu.ICarte;
+
 /**
  * 
  * @author JustStrato&Aazarias

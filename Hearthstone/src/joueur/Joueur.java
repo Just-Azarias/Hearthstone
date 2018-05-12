@@ -1,6 +1,7 @@
-package jeu;
+package joueur;
 
 import java.util.ArrayList;
+import jeu.*;
 
 public class Joueur implements IJoueur {
 	public Heros heros;
@@ -11,7 +12,23 @@ public class Joueur implements IJoueur {
 	public int stockMana;
 	public String pseudo;
 	
+	public Joueur(String pseudo, Heros hero) {
+		setPseudo(pseudo);
+		setHeros(heros);
+	}
+	
 
+	//setter
+	
+	public void setHeros(Heros heros){
+		this.heros=heros;
+	}
+	
+	public void setPseudo(String pseudo) {
+		this.pseudo=pseudo;
+	}
+	
+	
 	@Override
 	public String getPseudo() {
 		// TODO Auto-generated method stub
