@@ -34,4 +34,8 @@ public class Heros {
 	public String getNom() {
 		return this.nom;
 	}
+	
+	public String toString() {
+		return getNom()+" point de vie : "+ getPointDeVie();
+	}
 }

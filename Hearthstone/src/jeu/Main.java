@@ -14,6 +14,8 @@ public class Main {
 		Heros jaina = new Heros("Jaina");
 		Joueur joueur2 = new Joueur("joueur 2", jaina);
 		Plateau plateau = new Plateau(joueur1, joueur2);
+		System.out.println("Le joueur 1 est : "+ joueur1);
+		System.out.println("Le joueur 2 est : "+ joueur2);
 		
 	}
 

@@ -12,7 +12,7 @@ public class Joueur implements IJoueur {
 	public int stockMana;
 	public String pseudo;
 	
-	public Joueur(String pseudo, Heros hero) {
+	public Joueur(String pseudo, Heros heros) {
 		setPseudo(pseudo);
 		setHeros(heros);
 	}
@@ -32,7 +32,7 @@ public class Joueur implements IJoueur {
 	@Override
 	public String getPseudo() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.pseudo;
 	}
 
 	@Override
@@ -121,8 +121,13 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public Heros getHeros() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.heros;
+	}
+	
+	public String toString() {
+		String res;
+		res=getPseudo()+" son héros est : "+getHeros();
+		return res;
 	}
 
 }
