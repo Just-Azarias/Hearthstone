@@ -1,6 +1,6 @@
 package carte;
 
-import jeu.ICarte;
+import jeu.*;
 
 /**
  * 
