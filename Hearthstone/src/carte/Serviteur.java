@@ -8,9 +8,10 @@ import jeu.*;
  *
  */
 public class Serviteur extends Carte {
+	public int enAttente=0;
 
-	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite) {
-		super(nom, cout, proprietaire, capacite);
+	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite, String type) {
+		super(nom, cout, proprietaire, capacite, type);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -44,10 +45,18 @@ public class Serviteur extends Carte {
 		
 	}
 
+	public int getAttente(){
+		return this.enAttente;
+	}
+	
 	@Override
 	public boolean disparait() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public void reduireAttente() {
+		this.enAttente--;
 	}
 	
 }

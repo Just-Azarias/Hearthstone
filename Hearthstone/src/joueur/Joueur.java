@@ -1,9 +1,12 @@
 package joueur;
 
 import java.util.ArrayList;
+
+import carte.Serviteur;
 import jeu.*;
 
 public class Joueur implements IJoueur {
+	final int MAXMANA=10;
 	public Heros heros;
 	public ArrayList<ICarte> deck;
 	public ArrayList<ICarte> main;
@@ -74,8 +77,13 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void prendreTour() throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (this.getMana()<MAXMANA) this.mana++;
+		this.stockMana=this.mana;
+		for(ICarte n:this.cartePlateau) {
+			if (n instanceof Serviteur) {
+				if (((Serviteur) n).getAttente()>0) ((Serviteur) n).reduireAttente();
+			}
+		}
 	}
 
 	@Override

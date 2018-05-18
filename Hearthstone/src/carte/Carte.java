@@ -12,12 +12,14 @@ public abstract class Carte implements ICarte {
 	private int cout;
 	private IJoueur proprietaire;
 	private ICapacite capacite;
+	private String type;
 	
-	public Carte(String nom, int cout, IJoueur proprietaire, ICapacite capacite) {
+	public Carte(String nom, int cout, IJoueur proprietaire, ICapacite capacite, String type) {
 		this.setNom(nom);
 		this.setCout(cout);
 		this.setProprietaire(proprietaire);
 		this.setCapacite(capacite);
+		this.setType(type);
 	}
 	
 	//setter  
@@ -44,6 +46,10 @@ public abstract class Carte implements ICarte {
 	private void setProprietaire(IJoueur proprio) {
 		this.proprietaire=proprio;
 	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 	//getter
 	
@@ -61,7 +67,14 @@ public abstract class Carte implements ICarte {
 	public ICapacite getCapacite() {
 		return this.capacite;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	
 	public String toString() {
 		return this.getNom()+" coûte "+this.getCout()+" manas";
 	}
+
+
 }
