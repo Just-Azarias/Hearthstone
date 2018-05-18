@@ -70,7 +70,7 @@ public interface IJoueur {
 	 *            du nom de la carte que l'on souhaite
 	 * @return la première carte trouvée ou null si aucune carte ne correspond
 	 */
-	ICarte getCarteEnJeu(String nomCarte);
+	ICarte getCarteEnJeu(String nomCarte) throws HearthstoneException;
 
 	/**
 	 * Permet de rechercher une carte de la main par rapport à un bout de son nom

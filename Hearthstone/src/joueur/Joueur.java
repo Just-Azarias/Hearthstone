@@ -31,43 +31,44 @@ public class Joueur implements IJoueur {
 	
 	@Override
 	public String getPseudo() {
-		// TODO Auto-generated method stub
 		return this.pseudo;
 	}
 
 	@Override
 	public int getMana() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.mana;
 	}
 
 	@Override
 	public int getStockMana() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.stockMana;
 	}
 
 	@Override
 	public ArrayList<ICarte> getMain() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.main;
 	}
 
 	@Override
 	public ArrayList<ICarte> getJeu() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.cartePlateau;
 	}
 
 	@Override
-	public ICarte getCarteEnJeu(String nomCarte) {
-		// TODO Auto-generated method stub
+	public ICarte getCarteEnJeu(String nomCarte)/* throws HearthstoneException */{
+		for(ICarte n:this.cartePlateau) {
+			if (n.getNom().contains(nomCarte)) return n;
+		}
+		//new HearthstoneException("Carte introuvable");
 		return null;
 	}
 
 	@Override
 	public ICarte getCarteEnMain(String nomCarteMain) {
-		// TODO Auto-generated method stub
+		for(ICarte n:this.main) {
+			if (n.getNom().contains(nomCarteMain)) return n;
+		}
+		//new HearthstoneException("Carte introuvable");
 		return null;
 	}
 
@@ -115,8 +116,7 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		this.cartePlateau.remove(carte);
 	}
 
 	@Override
