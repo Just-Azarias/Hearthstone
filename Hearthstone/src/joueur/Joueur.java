@@ -71,7 +71,6 @@ public class Joueur implements IJoueur {
 		for(ICarte n:this.main) {
 			if (n.getNom().contains(nomCarteMain)) return n;
 		}
-		//new HearthstoneException("Carte introuvable");
 		return null;
 	}
 
@@ -88,8 +87,7 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void finirTour() throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if ()
 	}
 
 	@Override

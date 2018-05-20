@@ -1,4 +1,7 @@
 package Hearthstone.src.capacite;
+import carte.Serviteur;
+import jeu.*;
+
 
 /**
 *Cette classe définit l'application de dégat sur une cible
