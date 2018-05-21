@@ -2,7 +2,8 @@ package joueur;
 
 import java.util.ArrayList;
 
-import carte.Serviteur;
+import capacite.*;
+import carte.*;
 import jeu.*;
 
 public class Joueur implements IJoueur {
@@ -18,10 +19,17 @@ public class Joueur implements IJoueur {
 	public Joueur(String pseudo, Heros heros) {
 		setPseudo(pseudo);
 		setHeros(heros);
+		
 	}
 	
 
 	//setter
+//	this.deck.add(new Carte("Chasse-maree murloc", 2, this, new Capacite("Cri de guerre", "Invocation d'un serviteur +1/+1")));
+	public void setCartesNeutre() {
+		if (this.deck==null) {
+			Serviteur carte1 = new Serviteur("Chasse-marée	murloc ", 2, this, );
+		}
+	}
 	
 	public void setHeros(Heros heros){
 		this.heros=heros;
@@ -87,7 +95,7 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void finirTour() throws HearthstoneException {
-		if ()
+		//if ()
 	}
 
 	@Override
@@ -98,8 +106,12 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (this.main.contains(carte)){
+			if (carte.getCout()>this.getMana()) new HearthstoneException("Pas assez de Mana");
+			this.main.remove(carte);
+			this.cartePlateau.add(carte);
+		}
+		else new HearthstoneException("Carte non trouvé dans la main du joueur");
 	}
 
 	@Override
@@ -107,7 +119,7 @@ public class Joueur implements IJoueur {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException {
 		// TODO Auto-generated method stub

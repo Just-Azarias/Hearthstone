@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite;
+package capacite;
 
 /**
 *Cette classe définit la capacite d'attaquer un heros à travers toute défense

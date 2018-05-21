@@ -9,10 +9,15 @@ import jeu.*;
  */
 public class Serviteur extends Carte {
 	public int enAttente=0;
+	public int PointDeVie=15;
 
-	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite, String type) {
-		super(nom, cout, proprietaire, capacite, type);
+	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite) {
+		super(nom, cout, proprietaire, capacite);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void setPointDeVie(int PV) {
+		this.PointDeVie=PV;
 	}
 
 	@Override
@@ -57,6 +62,16 @@ public class Serviteur extends Carte {
 
 	public void reduireAttente() {
 		this.enAttente--;
+	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public int getPointDeVie() {
+		return this.PointDeVie;
 	}
 	
 }

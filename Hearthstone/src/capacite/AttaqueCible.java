@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite;
+package capacite;
 import carte.Serviteur;
 import jeu.*;
 
@@ -19,10 +19,10 @@ public class AttaqueCible extends Attaquer {
 		
 		/*On controle si la cible est un Heros, sinon c'est (normalement) un serviteur*/
 		if(cible instanceof Heros)
-			((Heros) cible).setPV(((Heros) cible).getPV()-degat);
+			((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie()-degat);
 		
 		else
-			((Serviteur) cible).setPV(((Serviteur) cible).getPV() - degat);
+			((Serviteur) cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-degat);
 	}
 	
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {

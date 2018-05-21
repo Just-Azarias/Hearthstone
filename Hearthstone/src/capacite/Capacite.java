@@ -1,4 +1,6 @@
-package capacite
+package capacite;
+
+import jeu.*;
 
 /**
 *
@@ -15,7 +17,7 @@ public abstract class Capacite implements ICapacite {
 	}
 	
 	public void setUsed(boolean dispo) {
-		this.disponible=disponible;
+		this.disponible=dispo;
 	}
 	public boolean isDisponible() {
 		return disponible;
@@ -27,6 +29,6 @@ public abstract class Capacite implements ICapacite {
 		return this.nom ;
 	}
 	public String toString() {
-		return "La capacite " + this.nom + " : " + this.descritpion 
+		return "La capacite " + this.nom + " : " + this.description;
 	}
 }

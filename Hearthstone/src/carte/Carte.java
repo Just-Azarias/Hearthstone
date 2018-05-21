@@ -1,4 +1,6 @@
-package Hearthstone.src.carte;
+package carte;
+
+import jeu.*;
 
 /**
 *
@@ -34,7 +36,7 @@ public abstract class Carte implements ICarte {
 	}
 	
 	public String toString(){
-		return this.nom+" coûte "this.cout + "mana";
+		return this.nom+" coûte " + this.cout + "mana";
 	}
 	
 }

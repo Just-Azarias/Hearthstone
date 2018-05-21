@@ -38,4 +38,5 @@ public class Heros {
 	public String toString() {
 		return getNom()+" point de vie : "+ getPointDeVie();
 	}
+
 }

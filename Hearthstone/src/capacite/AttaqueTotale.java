@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite;
+package capacite;
 
 /**
 *Cette classe définit des dégats globaux sur le plateau adverse

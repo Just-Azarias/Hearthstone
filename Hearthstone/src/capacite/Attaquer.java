@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite
+package capacite
 
 /**
 *

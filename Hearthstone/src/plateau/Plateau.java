@@ -79,14 +79,7 @@ public class Plateau implements IPlateau {
 
 	@Override
 	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
-		/*if (joueur.equals(this.joueur1)) {
-			this.joueur2.getHeros().
-		}
-		else if (joueur.equals(this.joueur2)) {
-			this.tourJoueur1=true;
-			this.tourJoueur2=false;
-		}
-		else new HearthstoneException("joueur inexistant");*/
+		if (getAdversaire(joueur).getHeros().getPointDeVie()==0) ; ///// a finir
 	}
 
 }
