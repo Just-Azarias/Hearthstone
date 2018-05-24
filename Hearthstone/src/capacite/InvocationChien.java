@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite;
+package capacite;
 
 /**Cette classe représente la capacité lacher les chiens
 *
