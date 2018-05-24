@@ -25,9 +25,18 @@ public class Joueur implements IJoueur {
 
 	//setter
 //	this.deck.add(new Carte("Chasse-maree murloc", 2, this, new Capacite("Cri de guerre", "Invocation d'un serviteur +1/+1")));
-	public void setCartesNeutre() {
+	public void setCartesNeutre(ArrayList<ICarte> liste) {
 		if (this.deck==null) {
-			Serviteur carte1 = new Serviteur("Chasse-marée	murloc ", 2, this, );
+			liste.add(new Serviteur("Chasse-marée	murloc ", 2, this,null, 2,1));
+			liste.add(new Sort("Charge",1,this,null));
+			liste.add(new Sort("Attaque mentale", 2, this,null ));
+			liste.add(new Serviteur("Champion de Hurlevent", 7, this,null , 6, 6));
+			liste.add(new Serviteur("Chef de raid", 3, this,new EffetPermanent("Bonus du chef de raid","Effet permanent sur les autres serviteurs alliés", 1, 0),2,2));
+			liste.add(new Serviteur("Garde de Baie-du-butin", 5, this,new Provocation(), 5, 4));
+			liste.add(new Serviteur("La missiliere temeraire", 6, this,null, 5, 2));
+			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
+
+
 		}
 	}
 	

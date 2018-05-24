@@ -9,13 +9,19 @@ import jeu.*;
  */
 public class Serviteur extends Carte {
 	public int enAttente=0;
-	public int PointDeVie=15;
+	public int pointDeVie=15;
+	public int pointAttaque;
 
-	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite) {
+	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite, int attaque, int PV) {
 		super(nom, cout, proprietaire, capacite);
-		// TODO Auto-generated constructor stub
+		setPointAttaque(attaque);
+		setPointDeVie(PV);
 	}
 	
+	private void setPointAttaque(int attaque) {
+		this.pointAttaque=attaque;
+	}
+
 	public void setPointDeVie(int PV) {
 		this.PointDeVie=PV;
 	}
