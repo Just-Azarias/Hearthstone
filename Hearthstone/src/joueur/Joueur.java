@@ -35,6 +35,10 @@ public class Joueur implements IJoueur {
 			liste.add(new Serviteur("Garde de Baie-du-butin", 5, this,new Provocation(), 5, 4));
 			liste.add(new Serviteur("La missiliere temeraire", 6, this,null, 5, 2));
 			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
+			liste.add(new Serviteur("Archimage", 6, this,new Provocation(), 4, 7));
+			liste.add(new Serviteur("Gnome lepreux", 1, this,new "attaque de lebreux", 1, 1));
+			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
+			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
 
 
 		}
