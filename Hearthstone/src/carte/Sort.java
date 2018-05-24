@@ -7,10 +7,19 @@ import jeu.*;
 *@author Badr Matthieu
 */
 public class Sort extends Carte {
-	public Sort(String nom, int cout, IJoueur joueur, Capacite capacite) {
+	public Sort(String nom, int cout, IJoueur joueur, ICapacite capacite) {
 		super(nom, cout, joueur, capacite);
 	}
 	
+	private void setPointDeVie(int pV) {
+		this.
+	}
+
+	private void setPointAttaque(int attaque) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public boolean disparait(){ // a revoir car surement non utilisé
 		return true;
 	}

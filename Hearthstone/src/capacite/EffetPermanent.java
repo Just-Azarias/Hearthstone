@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite;
+package capacite;
 
 /**Cette classe représente la capacité de modifier l'attaque et les PV d'autres serviteur
 *
@@ -14,11 +14,11 @@ public class EffetPermanent extends Capacite {
 		setPV(PV);
 	}
 	
-	private void setAttaque(attaque){
+	private void setAttaque(int attaque){
 		this.bonusAtq=attaque;
 	}
 	
-	private void setPV(PV) {
+	private void setPV(int PV) {
 		this.bonusPV=PV;
 	}
 	

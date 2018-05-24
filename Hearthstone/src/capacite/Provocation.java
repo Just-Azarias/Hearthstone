@@ -1,4 +1,4 @@
-package Hearthstone.src.capacite;
+package capacite;
 
 /**Cette classe représente la capacité provocation qui empêche l'attaque directe du héros
 *
@@ -6,7 +6,7 @@ package Hearthstone.src.capacite;
 */
 public class Provocation extends Capacite {
 	public Provocation(){
-		super("Provocation", "Protège le héros des attaques directe");
+		super("Provocation", "Protege le heros et ses serviteurs des attaques");
 	}
 	
     public final void executerAction(Object cible) {}
