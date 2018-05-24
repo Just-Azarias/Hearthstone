@@ -82,4 +82,9 @@ public class Plateau implements IPlateau {
 		if (getAdversaire(joueur).getHeros().getPointDeVie()==0) ; ///// a finir
 	}
 
+	public static Plateau getPlateau() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
