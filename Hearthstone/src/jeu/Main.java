@@ -8,8 +8,8 @@ import capacite.*;
 public class Main {
 
 	public static void main(String[] args) throws HearthstoneException {
-		Heros rexar = new Heros("Rexar");
-		Joueur joueur1 = new Joueur("joueur 1", rexar);
+		Heros rexxar = new Heros("Rexxar");
+		Joueur joueur1 = new Joueur("joueur 1", rexxar);
 		
 		Heros jaina = new Heros("Jaina");
 		Joueur joueur2 = new Joueur("joueur 2", jaina);

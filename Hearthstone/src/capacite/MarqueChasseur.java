@@ -1,4 +1,4 @@
-package Heathstone.src.capacite;
+package capacite;
 
 /**Cette classe représente la capacité Marque du Chasseur
 *

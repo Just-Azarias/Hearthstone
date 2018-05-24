@@ -19,14 +19,17 @@ public class Joueur implements IJoueur {
 	public Joueur(String pseudo, Heros heros) {
 		setPseudo(pseudo);
 		setHeros(heros);
-		
+		this.deck=null;
+		this.setCartesNeutre(this.deck);
+		if (heros.getNom().contains("Jaina")) this.setCartesNeutre(this.deck);
+		else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
+		else new HearthstoneException("héros non initialiser");
 	}
 	
 
 	//setter
 //	this.deck.add(new Carte("Chasse-maree murloc", 2, this, new Capacite("Cri de guerre", "Invocation d'un serviteur +1/+1")));
 	public void setCartesNeutre(ArrayList<ICarte> liste) {
-		if (this.deck==null) {
 			liste.add(new Serviteur("Chasse-marée	murloc ", 2, this,null, 2,1));
 			liste.add(new Sort("Charge",1,this,null));
 			liste.add(new Sort("Attaque mentale", 2, this,null ));
@@ -37,11 +40,23 @@ public class Joueur implements IJoueur {
 			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
 			liste.add(new Serviteur("Archimage", 6, this,new Provocation(), 4, 7));
 			liste.add(new Serviteur("Gnome lepreux", 1, this,new "attaque de lebreux", 1, 1));
-			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
-			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
-
-
-		}
+			liste.add(new Serviteur("Golem de moissons", 3, this,new Golemisation(this), 2, 3));
+	}
+	
+	public void setCartesJaina(ArrayList<ICarte> liste) {
+		liste.add(new Sort("Choc de flamme", 7,this,null)); //attaque massive
+		liste.add(new Sort("Eclair de givre",2,this,null)); //attaque du givre
+		liste.add(new Sort("Intelligence des arcanes", 2,this,null)); //pioche 2 cartes
+		liste.add(new Sort("Image mirroir",1,this,new ImageMiroir()));
+		liste.add(new Sort("Explosion pyrotechnique", 10, this, null)); //explosion pyrotechnique
+	}
+	
+	public void setCartesRexxar(ArrayList<ICarte> liste) {
+		liste.add(new Serviteur("Busard affame", 5,this,null, 3, 2)); //pioche une carte
+		liste.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
+		liste.add(new Sort("Tir des arcanes", 1,this,null)); //Tir des arcanes
+		liste.add(new Sort("Lachez les chiens", 3,this, new InvocationChien)); //pas une ICapacité le invocationChien
+		liste.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
 	}
 	
 	public void setHeros(Heros heros){
@@ -158,6 +173,7 @@ public class Joueur implements IJoueur {
 	public String toString() {
 		String res;
 		res=getPseudo()+" son héros est : "+getHeros();
+		//res=res+"\n Ses cartes sont :"+this.deck;  // patience, a voir losque les cartes fonctionneront niquel
 		return res;
 	}
 

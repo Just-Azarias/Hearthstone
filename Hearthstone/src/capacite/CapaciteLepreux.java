@@ -1,11 +1,11 @@
-package Hearthstone.src.capacite;
+package capacite;
 
 /**
 *
 *@author Badr Matthieu
 */
-public class capaciteLepreux extends AttaqueHeros {
-	public capaciteLepreux() {
+public class CapaciteLepreux extends AttaqueHeros {
+	public CapaciteLepreux() {
 		super("Attaque du Matthieu", "Rale d'agonie : Inflige 2 points de dégat au héros adverse", 2);
 	}
 	
