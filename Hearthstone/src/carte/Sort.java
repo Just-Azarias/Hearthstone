@@ -12,7 +12,7 @@ public class Sort extends Carte {
 		super(nom, cout, joueur, capacite);
 	}
 
-	public boolean disparait(){ // a revoir car surement non utilisé
+	public boolean disparait(){ // a revoir car surement non utilisee
 		return true;
 	}
 	

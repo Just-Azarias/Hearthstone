@@ -29,7 +29,7 @@ public class Heros {
 		this.pointDeVie = pointDeVie;
 	}
 
-	public boolean isPouvoir() {
+	public boolean getPouvoir() {
 		return pouvoir;
 	}
 

@@ -1,16 +1,18 @@
 package capacite;
 
+import jeu.IJoueur;
+
 /**
 *
 *@author Badr Matthieu
 */
 public class CapaciteLepreux extends AttaqueHeros {
 	public CapaciteLepreux() {
-		super("Attaque du Matthieu", "Rale d'agonie : Inflige 2 points de dégat au héros adverse", 2);
+		super("Attaque ", "Rale d'agonie : Inflige 2 points de degat au heros adverse", 2);
 	}
 	
-	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		super.executerAction(Plateau.getPlateau().getAdversaire((IJoueur) cible).getHeros());
+	public void executerEffetDisparition(IJoueur cible) throws HearthstoneException {
+		super.executerAction(cible.getHeros());
 	}
 	
 	public void executerEffetMiseEnJeu(Object cible){}

@@ -1,6 +1,7 @@
 package joueur;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import capacite.*;
 import carte.*;
@@ -22,13 +23,17 @@ public class Joueur implements IJoueur {
 		setPseudo(pseudo);
 		setHeros(heros);
 		this.deck=deck;
+		melanger();
 		//this.setCartesNeutre(this.deck);
 		//if (heros.getNom().contains("Jaina")) this.setCartesJaina(this.deck);
 		//else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
 		//else new HearthstoneException("héros non initialiser");
 	}
 	
-
+	public void melanger() {
+		Collections.shuffle(deck);
+	}
+	
     public boolean isProvocation() {
         for (ICarte carte : this.getJeu()) {
             if (carte.getCapacite() instanceof Provocation) return true;
@@ -124,19 +129,20 @@ public class Joueur implements IJoueur {
 		this.stockMana=this.mana;
 		for(ICarte n:this.cartePlateau) {
 			if (n instanceof Serviteur) {
-				if (((Serviteur) n).getAttente()>0) ((Serviteur) n).reduireAttente();
+				if (((Serviteur) n).getPeuJouer()>0) ((Serviteur) n).reduirePeuJouer();
 			}
 		}
 	}
 
 	@Override
-	public void finirTour() throws HearthstoneException {
-		//if ()
+	public void finirTour() throws HearthstoneException{
+		if (UniquePlateau.getInstance().getJoueurCourant().equals(this) for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
 	}
 
 	@Override
 	public void piocher() throws HearthstoneException {
-		
+		main.add(deck.get(0));
+		deck.remove(0);
 	}
 
 	@Override
@@ -194,12 +200,18 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void utiliserPouvoir(Object cible) throws HearthstoneException {
-		
+		if (this.heros.getPouvoir()) {
+			heros.getCapacite().executerAction(cible);
+			heros.setPouvoir(true);
+		}
+		else
+			throw new HearthstoneException("le heros ne peut pas utiliser son pouvoir 2 fois");
 	}
 
 	@Override
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
 		this.cartePlateau.remove(carte);
+		carte.executerEffetDisparition(Plateau.getInstance().getAdversaire(this));
 	}
 
 	//setter

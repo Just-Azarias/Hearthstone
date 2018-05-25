@@ -7,7 +7,7 @@ package capacite;
 public class MarqueChasseur extends AttaqueCible {
 	
 	public MarqueChasseur() {
-		super("Marque du Chasseur", "Modifie l'attaque du serviteur cible à 1", 0);
+		super("Marque du Chasseur", "Modifie les points de vie du serviteur cible à 1", 0);
 	}
 	
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
