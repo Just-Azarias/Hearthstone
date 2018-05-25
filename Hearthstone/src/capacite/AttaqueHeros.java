@@ -10,6 +10,7 @@ public class AttaqueHeros extends Attaque {
 		super(nom, description, degat);
 	}
 	
+	@Override
 	public void executerAction(Object cible) throws HearthstoneException {
 		if(this.isDisponible()==false)
 			throw new HearthstoneException("Pouvoir héroïque utilisable 1 seul fois par tour !");
