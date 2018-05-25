@@ -179,4 +179,10 @@ public interface IJoueur {
 	 */
 	void perdreCarte(ICarte carte) throws HearthstoneException;
 
+	/**
+	 * Si un serviteur avec provocation est présent sur le terrain
+	 * @return
+	 */
+	boolean isProvocation();
+
 }
