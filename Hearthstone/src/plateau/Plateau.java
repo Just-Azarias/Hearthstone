@@ -70,12 +70,9 @@ public class Plateau implements IPlateau {
 
 	@Override
 	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
-		if(uniquePlateau.getAdversaire(joueur).get!=0)
+		if(joueur==null) throw new HearthstoneException("Joueur null !");
+		if(uniquePlateau.getAdversaire(joueur).getHeros().getPointDeVie()>0) throw new HearthstoneException("Tentative de triche !");
+		System.out.println(this.getJoueurCourant().getPseudo()+" a gagné la partie ! Bravo !");
+		this.demarree=false;
 	}
-
-	public static Plateau getPlateau() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
