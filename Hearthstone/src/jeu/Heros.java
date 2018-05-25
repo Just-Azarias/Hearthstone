@@ -4,13 +4,19 @@ public class Heros {
 	private String nom;
 	private int pointDeVie=15;
 	private boolean pouvoir=true;
+	private ICapacite capacite;
 	
-	public Heros(String nom) {
+	public Heros(String nom, ICapacite capacite) {
 		setNom(nom);
+		setCapacite(capacite);
 	}
 	
 	//setter
 	
+	private void setCapacite(ICapacite capacite) {
+		this.capacite=capacite;
+	}
+
 	public void setNom(String nom) {
 		this.nom=nom;
 	}
@@ -33,6 +39,10 @@ public class Heros {
 	
 	public String getNom() {
 		return this.nom;
+	}
+	
+	public ICapacite getCapacite() {
+		return this.capacite;
 	}
 	
 	public String toString() {

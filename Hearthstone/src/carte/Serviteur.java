@@ -8,7 +8,7 @@ import jeu.*;
  * 
  */
 public class Serviteur extends Carte {
-	public int enAttente=0;   //nombre de fois que le joueur peut jouer
+	public int peuJouer=0;   //nombre de fois que le joueur peut jouer
 	public int pointDeVie=15;
 	public int pointAttaque;
 
@@ -60,8 +60,8 @@ public class Serviteur extends Carte {
 		return this.pointAttaque;
 	}
 
-	public int getAttente(){
-		return this.enAttente;
+	public int getPeuJouer(){
+		return this.peuJouer;
 	}
 	
 	@Override
@@ -70,8 +70,8 @@ public class Serviteur extends Carte {
 		return false;
 	}
 
-	public void reduireAttente() {
-		this.enAttente--;
+	public void reduirePeuJouer() {
+		this.peuJouer--;
 	}
 
 	

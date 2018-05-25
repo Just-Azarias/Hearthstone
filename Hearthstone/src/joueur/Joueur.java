@@ -142,10 +142,10 @@ public class Joueur implements IJoueur {
 	@Override
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
 		if (this.main.contains(carte)){
-			if (carte.getCout()>this.getStockMana()) new HearthstoneException("Pas assez de Mana");
+			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
 			this.getMain().remove(carte);
 			if (carte instanceof Serviteur) {
-				if (this.getJeu().size()>=MAXBOARD) new HearthstoneException("Plus de places sur le plateau");
+				if (this.getJeu().size()>=MAXBOARD) throw new HearthstoneException("Plus de places sur le plateau");
 				this.cartePlateau.add(carte);
 			}
 			carte.executerEffetDebutMiseEnJeu(carte);
@@ -158,31 +158,43 @@ public class Joueur implements IJoueur {
 	@Override
 	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException {
 		if (this.main.contains(carte)){
-			if (carte.getCout()>this.getStockMana()) new HearthstoneException("Pas assez de Mana");
+			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
 			this.getMain().remove(carte);
 			if (carte instanceof Serviteur) {
-				if (this.getJeu().size()>=MAXBOARD) new HearthstoneException("Plus de places sur le plateau");
+				if (this.getJeu().size()>=MAXBOARD) throw new HearthstoneException("Plus de places sur le plateau");
 				this.cartePlateau.add(carte);
 			}
 			carte.executerEffetDebutMiseEnJeu(cible);
 			this.setStockMana(this.getStockMana()-carte.getCout());
 		}
-		else new HearthstoneException("Carte non trouvé dans la main du joueur");
+		else throw new HearthstoneException("Carte non trouvé dans la main du joueur");
 	}
 	
 	@Override
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException {
-		if ( !((Serviteur) carte).peutAttaquer()) new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
+		if ( !((Serviteur) carte).peutAttaquer()) throw new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
 		if (cible instanceof Heros) {
-			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) new HearthstoneException("ne peut pas attaquer de hero si l'adversaire a une carte provocation");
-			//else (Serviteur )carte
+			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) throw new HearthstoneException("ne peut pas attaquer de hero si l'adversaire a une carte provocation");
+			else {
+				((Heros)cible).setPointDeVie(((Heros) cible).getPointDeVie()-((Serviteur )carte).getPointAttaque());
+				((Serviteur)carte).reduirePeuJouer();
+			}
+		}
+		if (cible instanceof Serviteur) {
+			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) {
+				if (!(((Serviteur)cible).getCapacite() instanceof Provocation)) throw new HearthstoneException("ne peut attaquer ccette carte car une carte provocation est mise en jeu");
+				else {
+					((Serviteur)cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-((Serviteur )carte).getPointAttaque());
+					((Serviteur)carte).setPointDeVie(((Serviteur) carte).getPointDeVie()-((Serviteur )cible).getPointAttaque());
+					((Serviteur)carte).reduirePeuJouer();
+				}
+			}
 		}
 	}
 
 	@Override
 	public void utiliserPouvoir(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package capacite;
 
+import carte.Serviteur;
+import jeu.IJoueur;
+
 /**Cette classe représente la capacite du golem des moissons
 *
 *@author Badr Matthieu
