@@ -63,20 +63,14 @@ public class Plateau implements IPlateau {
 
 	@Override
 	public void finTour(IJoueur joueur) throws HearthstoneException {
-		if (joueur.equals(this.joueur1)) {
-			this.tourJoueur1=false;
-			this.tourJoueur2=true;
-		}
-		else if (joueur.equals(this.joueur2)) {
-			this.tourJoueur1=true;
-			this.tourJoueur2=false;
-		}
-		else new HearthstoneException("joueur inexistant");
+		this.getJoueurCourant().finirTour();
+		this.setJoueurCourant(this.getAdversaire(joueur));
+		this.getJoueurCourant().prendreTour();
 	}
 
 	@Override
 	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
-		if (getAdversaire(joueur).getHeros().getPointDeVie()==0) ; ///// a finir
+		if(uniquePlateau.getAdversaire(joueur).get!=0)
 	}
 
 	public static Plateau getPlateau() {
