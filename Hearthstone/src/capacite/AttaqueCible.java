@@ -12,7 +12,7 @@ public class AttaqueCible extends Attaquer {
 	public AttaqueCible(String nom, String description, int degat) {
 		super( nom, description, degat);
 	}
-	
+	@Override
 	public void executerAction(Object cible) throws HearthstoneException {
 		if(cible ==null)
 			throw new HearthstoneException("Cible NULL !");
@@ -24,13 +24,16 @@ public class AttaqueCible extends Attaquer {
 		else
 			((Serviteur) cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-degat);
 	}
-	
+	@Override
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		this.executerAction(cible);
 	}
+	@Override
 	public void executerEffetDebutTour() {}
 	
+	@Override
 	public void executerEffetDisparition(Object cible){}
 	
+	@Override
 	public void executerEffetFinTour() {}
 }

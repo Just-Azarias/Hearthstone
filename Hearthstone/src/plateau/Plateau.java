@@ -1,30 +1,28 @@
 package plateau;
 
+import java.util.ArrayList;
+
 import jeu.*;
 import joueur.*;
 
 public class Plateau implements IPlateau {
-	private IJoueur joueur1;
-	private IJoueur joueur2;
-	private boolean tourJoueur1;
-	private boolean tourJoueur2;
-	private boolean partie;
-
-	public Plateau(IJoueur joueur1, IJoueur joueur2) throws HearthstoneException {
-		ajouterJoueur(joueur1);
-		ajouterJoueur(joueur2);
-		this.partie=false;
-		this.tourJoueur1=true;
-		this.tourJoueur2=false;
-		
+	private ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
+	private static IPlateau uniquePlateau=null;
+	private IJoueur joueurCourant = null;
+	private boolean demaree = false;
+	
+	public static IPlateau getInstance() {
+		if(uniquePlateau==null)
+		uniquePlateau = new Plateau();
+		return uniquePlateau;
 	}
 	
 	@Override
     public void ajouterJoueur(IJoueur joueur) throws HearthstoneException{
 		if (joueur==null)  new HearthstoneException("Joueur non creer");
-		if (this.joueur1==null) this.joueur1=joueur;
-		else if (this.joueur2==null) this.joueur2=joueur;
-		else new HearthstoneException("Joueurs deja enregistre");
+		if (joueurs.size() == 2) throw new HearthstoneException("2 Joueurs deja enregistrees !");
+		if (joueurs.contains(joueur)) new HearthstoneException("Joueur deja enregistre !");
+		joueurs.add(joueur);
 	}
 
 	@Override
