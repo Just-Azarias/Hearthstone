@@ -1,6 +1,7 @@
 package plateau;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import jeu.*;
 import joueur.*;
@@ -9,7 +10,7 @@ public class Plateau implements IPlateau {
 	private ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();
 	private static IPlateau uniquePlateau=null;
 	private IJoueur joueurCourant = null;
-	private boolean demaree = false;
+	private boolean demarree = false;
 	
 	public static IPlateau getInstance() {
 		if(uniquePlateau==null)
@@ -19,70 +20,59 @@ public class Plateau implements IPlateau {
 	
 	@Override
     public void ajouterJoueur(IJoueur joueur) throws HearthstoneException{
-		if (joueur==null)  new HearthstoneException("Joueur non creer");
+		if (joueur==null) throw new HearthstoneException("Joueur non creer");
 		if (joueurs.size() == 2) throw new HearthstoneException("2 Joueurs deja enregistrees !");
-		if (joueurs.contains(joueur)) new HearthstoneException("Joueur deja enregistre !");
+		if (joueurs.contains(joueur)) throw new HearthstoneException("Joueur deja enregistre !");
 		joueurs.add(joueur);
 	}
 
 	@Override
 	public IJoueur getJoueurCourant() {
-		if (this.tourJoueur1) return this.joueur1;
-		else return this.joueur2;
+		return this.joueurCourant;
 	}
 
 	@Override
 	public void setJoueurCourant(IJoueur joueur) throws HearthstoneException {
-		if (joueur.equals(this.joueur1)) {
-			this.tourJoueur1=true;
-			this.tourJoueur2=false;
-		}
-		else if (joueur.equals(this.joueur2)) {
-			this.tourJoueur1=false;
-			this.tourJoueur2=true;
-		}
-		else new HearthstoneException("joueur inexistant");
+		this.joueurCourant = joueur;
 	}
 
 	@Override
 	public IJoueur getAdversaire(IJoueur joueur) throws HearthstoneException {
-		if (joueur.equals(this.joueur1)) return this.joueur2;
-		else if (joueur.equals(this.joueur2)) return this.joueur1;
-		else new HearthstoneException("joueur inexistant");
-		return null;
+		if(joueur==null) throw new HearthstoneException("Joueur Incorrecte");
+		if(!joueurs.contains(joueur)) throw new HearthstoneException("Le joueur n'est pas dans la partie !");
+		return (this.getJoueurCourant() == joueurs.get(0)) ? this.joueurs.get(1) : this.joueurs.get(0);
 	}
 
 	@Override
 	public void demarrerPartie() throws HearthstoneException {
-		this.partie=true;
+		if(this.estDemarree()) throw new HearthstoneException("La Partie est en cours !");
+		if(this.joueurs.size()!=2) throw new HearthstoneException("Nombre de joueurs Invalide !");
+		this.demarree=true;
+		this.setJoueurCourant(this.joueurs.get((new Random()).nextInt(2)));
+		for(int k=0;k<3;k++) {
+			uniquePlateau.getJoueurCourant().piocher();
+			uniquePlateau.getAdversaire(uniquePlateau.getJoueurCourant()).piocher();
+		}
+		this.getJoueurCourant().prendreTour();
 	}
 
 	@Override
 	public boolean estDemarree() {
-		return this.partie;
+		return this.demarree;
 	}
 
 	@Override
 	public void finTour(IJoueur joueur) throws HearthstoneException {
-		if (joueur.equals(this.joueur1)) {
-			this.tourJoueur1=false;
-			this.tourJoueur2=true;
-		}
-		else if (joueur.equals(this.joueur2)) {
-			this.tourJoueur1=true;
-			this.tourJoueur2=false;
-		}
-		else new HearthstoneException("joueur inexistant");
+		this.getJoueurCourant().finirTour();
+		this.setJoueurCourant(this.getAdversaire(joueur));
+		this.getJoueurCourant().prendreTour();
 	}
 
 	@Override
 	public void gagnePartie(IJoueur joueur) throws HearthstoneException {
-		if (getAdversaire(joueur).getHeros().getPointDeVie()==0) ; ///// a finir
+		if(joueur==null) throw new HearthstoneException("Joueur null !");
+		if(uniquePlateau.getAdversaire(joueur).getHeros().getPointDeVie()>0) throw new HearthstoneException("Tentative de triche !");
+		System.out.println(this.getJoueurCourant().getPseudo()+" a gagné la partie ! Bravo !");
+		this.demarree=false;
 	}
-
-	public static Plateau getPlateau() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
