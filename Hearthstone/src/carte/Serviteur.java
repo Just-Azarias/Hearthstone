@@ -5,10 +5,10 @@ import jeu.*;
 /**
  * 
  * @author JustStrato&Aazarias
- *
+ * 
  */
 public class Serviteur extends Carte {
-	public int enAttente=0;
+	public int enAttente=0;   //nombre de fois que le joueur peut jouer
 	public int pointDeVie=15;
 	public int pointAttaque;
 
@@ -23,7 +23,7 @@ public class Serviteur extends Carte {
 	}
 
 	public void setPointDeVie(int PV) {
-		this.PointDeVie=PV;
+		this.pointDeVie=PV;
 	}
 
 	@Override
@@ -55,6 +55,10 @@ public class Serviteur extends Carte {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public int getPointAttaque() {
+		return this.pointAttaque;
+	}
 
 	public int getAttente(){
 		return this.enAttente;
@@ -70,14 +74,14 @@ public class Serviteur extends Carte {
 		this.enAttente--;
 	}
 
-	@Override
-	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public boolean peutAttaquer() {
+		if (this.getAttente()<1) return false;
+		return true;
 	}
 	
 	public int getPointDeVie() {
-		return this.PointDeVie;
+		return this.pointDeVie;
 	}
 	
 }

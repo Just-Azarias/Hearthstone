@@ -11,15 +11,6 @@ public class Sort extends Carte {
 	public Sort(String nom, int cout, IJoueur joueur, ICapacite capacite) {
 		super(nom, cout, joueur, capacite);
 	}
-	
-	private void setPointDeVie(int pV) {
-		this.
-	}
-
-	private void setPointAttaque(int attaque) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public boolean disparait(){ // a revoir car surement non utilisé
 		return true;
@@ -47,12 +38,6 @@ public class Sort extends Carte {
 	
 	public String toString() {
 		return "Sort " + super.toString();
-	}
-
-	@Override
-	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

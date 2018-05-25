@@ -4,7 +4,7 @@ import jeu.*;
 
 
 /**
-*Cette classe définit l'application de dégat sur une cible
+*Cette classe definit l'application de degat sur une cible
 *@author Badr Matthieu
 */
 public class AttaqueCible extends Attaquer {

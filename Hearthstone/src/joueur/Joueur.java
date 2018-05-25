@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import capacite.*;
 import carte.*;
 import jeu.*;
+import plateau.Plateau;
 
 public class Joueur implements IJoueur {
+	final int MAXBOARD=7;
 	final int MAXMANA=10;
 	public Heros heros;
 	public ArrayList<ICarte> deck;
@@ -27,8 +29,14 @@ public class Joueur implements IJoueur {
 	}
 	
 
-	//setter
-//	this.deck.add(new Carte("Chasse-maree murloc", 2, this, new Capacite("Cri de guerre", "Invocation d'un serviteur +1/+1")));
+    public boolean isProvocation() {
+        for (ICarte carte : this.getJeu()) {
+            if (carte.getCapacite() instanceof Provocation) return true;
+        }
+        return false;
+    }
+
+    @Override
 	public void setCartesNeutre(ArrayList<ICarte> liste) {
 			liste.add(new Serviteur("Chasse-marée	murloc ", 2, this,null, 2,1));
 			liste.add(new Sort("Charge",1,this,null));
@@ -128,30 +136,47 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void piocher() throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
 		if (this.main.contains(carte)){
-			if (carte.getCout()>this.getMana()) new HearthstoneException("Pas assez de Mana");
-			this.main.remove(carte);
-			this.cartePlateau.add(carte);
+			if (carte.getCout()>this.getStockMana()) new HearthstoneException("Pas assez de Mana");
+			this.getMain().remove(carte);
+			if (carte instanceof Serviteur) {
+				if (this.getJeu().size()>=MAXBOARD) new HearthstoneException("Plus de places sur le plateau");
+				this.cartePlateau.add(carte);
+			}
+			carte.executerEffetDebutMiseEnJeu(carte);
+			this.setStockMana(this.getStockMana()-carte.getCout());
 		}
 		else new HearthstoneException("Carte non trouvé dans la main du joueur");
 	}
 
+
 	@Override
 	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (this.main.contains(carte)){
+			if (carte.getCout()>this.getStockMana()) new HearthstoneException("Pas assez de Mana");
+			this.getMain().remove(carte);
+			if (carte instanceof Serviteur) {
+				if (this.getJeu().size()>=MAXBOARD) new HearthstoneException("Plus de places sur le plateau");
+				this.cartePlateau.add(carte);
+			}
+			carte.executerEffetDebutMiseEnJeu(cible);
+			this.setStockMana(this.getStockMana()-carte.getCout());
+		}
+		else new HearthstoneException("Carte non trouvé dans la main du joueur");
 	}
 	
 	@Override
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if ( !((Serviteur) carte).peutAttaquer()) new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
+		if (cible instanceof Heros) {
+			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) new HearthstoneException("ne peut pas attaquer de hero si l'adversaire a une carte provocation");
+			//else (Serviteur )carte
+		}
 	}
 
 	@Override
@@ -165,10 +190,29 @@ public class Joueur implements IJoueur {
 		this.cartePlateau.remove(carte);
 	}
 
+	//setter
+	
+	private void setStockMana(int i) {
+		this.stockMana=i;
+	}
+
+
+	private void setMana(int i) {
+		this.mana=i;
+	}
+
+	//getter 
+	
 	@Override
 	public Heros getHeros() {
 		return this.heros;
 	}
+	
+	
+	
+	
+	
+	
 	
 	public String toString() {
 		String res;
