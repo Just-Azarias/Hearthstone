@@ -1,12 +1,15 @@
 package joueur;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import capacite.*;
 import carte.*;
 import jeu.*;
+import plateau.Plateau;
 
 public class Joueur implements IJoueur {
+	final int MAXBOARD=7;
 	final int MAXMANA=10;
 	public Heros heros;
 	public ArrayList<ICarte> deck;
@@ -16,19 +19,29 @@ public class Joueur implements IJoueur {
 	public int stockMana;
 	public String pseudo;
 	
-	public Joueur(String pseudo, Heros heros) {
+	public Joueur(String pseudo, Heros heros, ArrayList<ICarte> deck) {
 		setPseudo(pseudo);
 		setHeros(heros);
-		this.deck=null;
-		this.setCartesNeutre(this.deck);
-		if (heros.getNom().contains("Jaina")) this.setCartesNeutre(this.deck);
-		else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
-		else new HearthstoneException("héros non initialiser");
+		this.deck=deck;
+		melanger();
+		//this.setCartesNeutre(this.deck);
+		//if (heros.getNom().contains("Jaina")) this.setCartesJaina(this.deck);
+		//else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
+		//else new HearthstoneException("héros non initialiser");
 	}
 	
+	public void melanger() {
+		Collections.shuffle(deck);
+	}
+	
+    public boolean isProvocation() {
+        for (ICarte carte : this.getJeu()) {
+            if (carte.getCapacite() instanceof Provocation) return true;
+        }
+        return false;
+    }
 
-	//setter
-//	this.deck.add(new Carte("Chasse-maree murloc", 2, this, new Capacite("Cri de guerre", "Invocation d'un serviteur +1/+1")));
+    @Override
 	public void setCartesNeutre(ArrayList<ICarte> liste) {
 			liste.add(new Serviteur("Chasse-marée	murloc ", 2, this,null, 2,1));
 			liste.add(new Sort("Charge",1,this,null));
@@ -55,7 +68,7 @@ public class Joueur implements IJoueur {
 		liste.add(new Serviteur("Busard affame", 5,this,null, 3, 2)); //pioche une carte
 		liste.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
 		liste.add(new Sort("Tir des arcanes", 1,this,null)); //Tir des arcanes
-		liste.add(new Sort("Lachez les chiens", 3,this, new InvocationChien)); //pas une ICapacité le invocationChien
+		liste.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this))); //pas une ICapacité le invocationChien
 		liste.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
 	}
 	
@@ -116,55 +129,104 @@ public class Joueur implements IJoueur {
 		this.stockMana=this.mana;
 		for(ICarte n:this.cartePlateau) {
 			if (n instanceof Serviteur) {
-				if (((Serviteur) n).getAttente()>0) ((Serviteur) n).reduireAttente();
+				if (((Serviteur) n).getPeuJouer()>0) ((Serviteur) n).reduirePeuJouer();
 			}
 		}
 	}
 
 	@Override
-	public void finirTour() throws HearthstoneException {
-		//if ()
+	public void finirTour() throws HearthstoneException{
+		if (UniquePlateau.getInstance().getJoueurCourant().equals(this) for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
 	}
 
 	@Override
 	public void piocher() throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		main.add(deck.get(0));
+		deck.remove(0);
 	}
 
 	@Override
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
 		if (this.main.contains(carte)){
-			if (carte.getCout()>this.getMana()) new HearthstoneException("Pas assez de Mana");
-			this.main.remove(carte);
-			this.cartePlateau.add(carte);
+			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
+			this.getMain().remove(carte);
+			if (carte instanceof Serviteur) {
+				if (this.getJeu().size()>=MAXBOARD) throw new HearthstoneException("Plus de places sur le plateau");
+				this.cartePlateau.add(carte);
+			}
+			carte.executerEffetDebutMiseEnJeu(carte);
+			this.setStockMana(this.getStockMana()-carte.getCout());
 		}
 		else new HearthstoneException("Carte non trouvé dans la main du joueur");
 	}
 
+
 	@Override
 	public void jouerCarte(ICarte carte, Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (this.main.contains(carte)){
+			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
+			this.getMain().remove(carte);
+			if (carte instanceof Serviteur) {
+				if (this.getJeu().size()>=MAXBOARD) throw new HearthstoneException("Plus de places sur le plateau");
+				this.cartePlateau.add(carte);
+			}
+			carte.executerEffetDebutMiseEnJeu(cible);
+			this.setStockMana(this.getStockMana()-carte.getCout());
+		}
+		else throw new HearthstoneException("Carte non trouvé dans la main du joueur");
 	}
 	
 	@Override
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if ( !((Serviteur) carte).peutAttaquer()) throw new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
+		if (cible instanceof Heros) {
+			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) throw new HearthstoneException("ne peut pas attaquer de hero si l'adversaire a une carte provocation");
+			else {
+				((Heros)cible).setPointDeVie(((Heros) cible).getPointDeVie()-((Serviteur )carte).getPointAttaque());
+				((Serviteur)carte).reduirePeuJouer();
+			}
+		}
+		if (cible instanceof Serviteur) {
+			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) {
+				if (!(((Serviteur)cible).getCapacite() instanceof Provocation)) throw new HearthstoneException("ne peut attaquer ccette carte car une carte provocation est mise en jeu");
+				else {
+					((Serviteur)cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-((Serviteur )carte).getPointAttaque());
+					((Serviteur)carte).setPointDeVie(((Serviteur) carte).getPointDeVie()-((Serviteur )cible).getPointAttaque());
+					((Serviteur)carte).reduirePeuJouer();
+				}
+			}
+		}
 	}
 
 	@Override
 	public void utiliserPouvoir(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-
+		if (this.heros.getPouvoir()) {
+			heros.getCapacite().executerAction(cible);
+			heros.setPouvoir(true);
+		}
+		else
+			throw new HearthstoneException("le heros ne peut pas utiliser son pouvoir 2 fois");
 	}
 
 	@Override
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
 		this.cartePlateau.remove(carte);
+		carte.executerEffetDisparition(Plateau.getInstance().getAdversaire(this));
 	}
 
+	//setter
+	
+	private void setStockMana(int i) {
+		this.stockMana=i;
+	}
+
+
+	private void setMana(int i) {
+		this.mana=i;
+	}
+
+	//getter 
+	
 	@Override
 	public Heros getHeros() {
 		return this.heros;

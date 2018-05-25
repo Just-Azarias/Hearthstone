@@ -25,7 +25,7 @@ public class AttaqueTotale extends Attaque {
 	
 	public void executerEffetDebutTour() {}
 	
-	public void executerEffetDisparition(Object ciblé) {}
+	public void executerEffetDisparition(Object cible) {}
 	
 	public void executerEffetFinTour() {}
 }

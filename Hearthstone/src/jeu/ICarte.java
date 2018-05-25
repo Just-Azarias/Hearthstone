@@ -10,7 +10,7 @@ public interface ICarte extends Cloneable {
          String getNom();                                // Une carte doit avoir un nom
          int getCout();                          // Une carte coûte un certain nombre de mana
          IJoueur getProprietaire();      // Une carte appartient à un joueur
-         String getType();			//Une carte a forcément un type
+         ICapacite getCapacite();			//Une carte a forcément une capacite, null sinon
         
          /**
          * Une carte peut avoir un effet au début de chaque tour où elle est en jeu

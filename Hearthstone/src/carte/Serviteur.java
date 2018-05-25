@@ -5,10 +5,10 @@ import jeu.*;
 /**
  * 
  * @author JustStrato&Aazarias
- *
+ * 
  */
 public class Serviteur extends Carte {
-	public int enAttente=0;
+	public int peuJouer=0;   //nombre de fois que le joueur peut jouer
 	public int pointDeVie=15;
 	public int pointAttaque;
 
@@ -23,13 +23,16 @@ public class Serviteur extends Carte {
 	}
 
 	public void setPointDeVie(int PV) {
-		this.PointDeVie=PV;
+		this.pointDeVie=PV;
 	}
-
+	
+	private void setPeuJouer(int i) {
+			this.peuJouer=i;
+		}
+	
 	@Override
 	public void executerEffetDebutTour(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
+		this.setPeuJouer(1);
 	}
 
 	@Override
@@ -55,9 +58,13 @@ public class Serviteur extends Carte {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public int getPointAttaque() {
+		return this.pointAttaque;
+	}
 
-	public int getAttente(){
-		return this.enAttente;
+	public int getPeuJouer(){
+		return this.peuJouer;
 	}
 	
 	@Override
@@ -66,18 +73,18 @@ public class Serviteur extends Carte {
 		return false;
 	}
 
-	public void reduireAttente() {
-		this.enAttente--;
+	public void reduirePeuJouer() {
+		this.peuJouer--;
 	}
 
-	@Override
-	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public boolean peutAttaquer() {
+		if (this.getPeuJouer()<1) return false;
+		return true;
 	}
 	
 	public int getPointDeVie() {
-		return this.PointDeVie;
+		return this.pointDeVie;
 	}
 	
 }

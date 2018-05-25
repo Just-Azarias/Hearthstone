@@ -1,4 +1,4 @@
-package capacite
+package capacite;
 
 /**
 *
