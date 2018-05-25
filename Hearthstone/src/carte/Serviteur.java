@@ -25,11 +25,14 @@ public class Serviteur extends Carte {
 	public void setPointDeVie(int PV) {
 		this.pointDeVie=PV;
 	}
-
+	
+	private void setPeuJouer(int i) {
+			this.peuJouer=i;
+		}
+	
 	@Override
 	public void executerEffetDebutTour(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
+		this.setPeuJouer(1);
 	}
 
 	@Override
@@ -76,7 +79,7 @@ public class Serviteur extends Carte {
 
 	
 	public boolean peutAttaquer() {
-		if (this.getAttente()<1) return false;
+		if (this.getPeuJouer()<1) return false;
 		return true;
 	}
 	

@@ -232,12 +232,6 @@ public class Joueur implements IJoueur {
 		return this.heros;
 	}
 	
-	
-	
-	
-	
-	
-	
 	public String toString() {
 		String res;
 		res=getPseudo()+" son héros est : "+getHeros();
