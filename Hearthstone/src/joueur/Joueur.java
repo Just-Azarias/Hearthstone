@@ -16,14 +16,14 @@ public class Joueur implements IJoueur {
 	public int stockMana;
 	public String pseudo;
 	
-	public Joueur(String pseudo, Heros heros) {
+	public Joueur(String pseudo, Heros heros, ArrayList<ICarte> deck) {
 		setPseudo(pseudo);
 		setHeros(heros);
-		this.deck=null;
-		this.setCartesNeutre(this.deck);
-		if (heros.getNom().contains("Jaina")) this.setCartesNeutre(this.deck);
-		else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
-		else new HearthstoneException("héros non initialiser");
+		this.deck=deck;
+		//this.setCartesNeutre(this.deck);
+		//if (heros.getNom().contains("Jaina")) this.setCartesJaina(this.deck);
+		//else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
+		//else new HearthstoneException("héros non initialiser");
 	}
 	
 
@@ -55,7 +55,7 @@ public class Joueur implements IJoueur {
 		liste.add(new Serviteur("Busard affame", 5,this,null, 3, 2)); //pioche une carte
 		liste.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
 		liste.add(new Sort("Tir des arcanes", 1,this,null)); //Tir des arcanes
-		liste.add(new Sort("Lachez les chiens", 3,this, new InvocationChien)); //pas une ICapacité le invocationChien
+		liste.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this))); //pas une ICapacité le invocationChien
 		liste.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
 	}
 	
