@@ -1,5 +1,8 @@
 package capacite;
 
+import carte.Serviteur;
+import jeu.HearthstoneException;
+
 /**Cette classe représente la capacité Marque du Chasseur
 *
 *@author Badr Matthieu
@@ -13,7 +16,7 @@ public class MarqueChasseur extends AttaqueCible {
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		super.executerEffetMiseEnJeu(cible);
 		if(cible instanceof Serviteur)
-			((Serviteur) cible).setPV(1);
+			((Serviteur) cible).setPointDeVie(1);
 		else
 			throw new HearthstoneException("Erreur ! La cible n'est pas un serviteur !");
 	}

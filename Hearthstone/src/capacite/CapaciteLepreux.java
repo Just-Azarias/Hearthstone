@@ -1,5 +1,6 @@
 package capacite;
 
+import jeu.HearthstoneException;
 import jeu.IJoueur;
 
 /**

@@ -9,8 +9,9 @@ import jeu.*;
 import plateau.Plateau;
 
 public class Joueur implements IJoueur {
-	final int MAXBOARD=7;
-	final int MAXMANA=10;
+	public final static int MAX_BOARD=7;
+	public final static int MAX_MANA=10;
+	public final static int TAILLE_DECK = 15;
 	public Heros heros;
 	public ArrayList<ICarte> deck;
 	public ArrayList<ICarte> main;

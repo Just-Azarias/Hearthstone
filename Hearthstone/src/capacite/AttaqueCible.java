@@ -19,10 +19,10 @@ public class AttaqueCible extends Attaquer {
 		
 		/*On controle si la cible est un Heros, sinon c'est (normalement) un serviteur*/
 		if(cible instanceof Heros)
-			((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie()-degat);
+			((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie()-getDegat());
 		
 		else
-			((Serviteur) cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-degat);
+			((Serviteur) cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-getDegat());
 	}
 	@Override
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {

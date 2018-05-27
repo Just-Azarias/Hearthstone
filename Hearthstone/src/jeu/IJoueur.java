@@ -19,6 +19,11 @@ public interface IJoueur {
 	public final static int TAILLE_DECK = 15; // Nombre max de cartes dans le deck
 
 	/**
+	 * Nombre max de serviteur sur ce cote du terrain
+	 */
+	public final static int MAX_BOARD=7;
+	
+	/**
 	 * @return C'est le héros choisi par le joueur
 	 */
 	Heros getHeros();

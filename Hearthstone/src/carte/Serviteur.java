@@ -1,5 +1,6 @@
 package carte;
 
+import capacite.Charge;
 import capacite.Provocation;
 import jeu.*;
 import joueur.Joueur;
@@ -21,7 +22,14 @@ public class Serviteur extends Carte {
 		setPointDeVie(PV);
 	}
 	
-	private void setPointAttaque(int attaque) throws HearthstoneException {
+	public Serviteur(Serviteur serviteur)throws HearthstoneException {
+		super(serviteur.getNom(), serviteur.getCout(), serviteur.getProprietaire(), serviteur.getCapacite());
+		setPointAttaque(serviteur.getPointAttaque());
+		setPointDeVie(serviteur.getPointDeVie());
+		
+	}
+	
+	public void setPointAttaque(int attaque) throws HearthstoneException {
 		if(attaque<0) throw new HearthstoneException("Attaque Incorrecte !");
 		this.pointAttaque=attaque;
 	}

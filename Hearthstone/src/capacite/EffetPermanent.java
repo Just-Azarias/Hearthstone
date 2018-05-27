@@ -1,5 +1,10 @@
 package capacite;
 
+import carte.Serviteur;
+import jeu.HearthstoneException;
+import jeu.ICarte;
+import jeu.IJoueur;
+
 /**Cette classe représente la capacité de modifier l'attaque et les PV d'autres serviteur
 *
 * @author Badr Matthieu
@@ -32,15 +37,15 @@ public class EffetPermanent extends Capacite {
 	
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
 		for(ICarte carte : ((IJoueur) cible).getJeu()) {
-			((Serviteur) carte).setAtq(((Serviteur) carte).getAtq() + bonusAtq);
-			((Serviteur) carte).setPV(((Serviteur) carte).getPV() + bonusPV);
+			((Serviteur) carte).setPointAttaque(((Serviteur) carte).getPointAttaque() + bonusAtq);
+			((Serviteur) carte).setPointDeVie(((Serviteur) carte).getPointDeVie() + bonusPV);
 		}
 	}
 	
 	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		for(ICarte carte ; ((IJoueur) cible).getJeu()) {
-			((Serviteur) carte).setAtq(((Serviteur) carte).getAtq() - bonusAtq);
-			((Serviteur) carte).setPV(((Serviteur) carte).getPV() - bonusPV);
+		for(ICarte carte : ((IJoueur) cible).getJeu()) {
+			((Serviteur) carte).setPointAttaque(((Serviteur) carte).getPointAttaque() - bonusAtq);
+			((Serviteur) carte).setPointDeVie(((Serviteur) carte).getPointDeVie() - bonusPV);
 		}
 	}
 	
