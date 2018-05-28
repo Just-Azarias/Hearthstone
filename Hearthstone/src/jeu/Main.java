@@ -13,7 +13,7 @@ public class Main {
 	
 	private static void afficherPlateau() {
 		System.out.println("\n===========================================");
-
+		
 		System.out.println("\n===========================================");
 		System.out.println("\n-------------------------------------------");
 		System.out.println("\n===========================================");
