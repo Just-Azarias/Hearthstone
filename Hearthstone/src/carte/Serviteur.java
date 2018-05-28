@@ -1,28 +1,41 @@
 package carte;
 
+import capacite.Charge;
+import capacite.Provocation;
 import jeu.*;
+import joueur.Joueur;
+import plateau.Plateau;
 
-/**
+/**Cette classe représente un Serviteur
  * 
- * @author JustStrato&Aazarias
+ * @author Badr Matthieu
  * 
  */
 public class Serviteur extends Carte {
-	public int peuJouer=0;   //nombre de fois que le joueur peut jouer
+	public int peuJouer=0;   //nombre de fois que le serviteur peut attaquer
 	public int pointDeVie=15;
 	public int pointAttaque;
 
-	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite, int attaque, int PV) {
+	public Serviteur(String nom, int cout, IJoueur proprietaire, ICapacite capacite, int attaque, int PV) throws HearthstoneException {
 		super(nom, cout, proprietaire, capacite);
 		setPointAttaque(attaque);
 		setPointDeVie(PV);
 	}
 	
-	private void setPointAttaque(int attaque) {
+	public Serviteur(Serviteur serviteur)throws HearthstoneException {
+		super(serviteur.getNom(), serviteur.getCout(), serviteur.getProprietaire(), serviteur.getCapacite());
+		setPointAttaque(serviteur.getPointAttaque());
+		setPointDeVie(serviteur.getPointDeVie());
+		
+	}
+	
+	public void setPointAttaque(int attaque) throws HearthstoneException {
+		if(attaque<0) throw new HearthstoneException("Attaque Incorrecte !");
 		this.pointAttaque=attaque;
 	}
 
-	public void setPointDeVie(int PV) {
+	public void setPointDeVie(int PV) throws HearthstoneException {
+		if(PV<=0) throw new HearthstoneException("Point de vie incorrecte !");
 		this.pointDeVie=PV;
 	}
 	
@@ -32,31 +45,50 @@ public class Serviteur extends Carte {
 	
 	@Override
 	public void executerEffetDebutTour(Object cible) throws HearthstoneException {
-		this.setPeuJouer(1);
+		this.peuJouer=1;
+		this.getCapacite().executerEffetDebutTour();
 	}
 
 	@Override
 	public void executerEffetFinTour(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
+		this.getCapacite().executerEffetFinTour();
 	}
 
 	@Override
 	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
+		if(this.getCapacite() instanceof Charge) this.peuJouer=1;
+		this.getCapacite().executerEffetMiseEnJeu(cible);
 		
 	}
 
 	@Override
 	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
+		this.getCapacite().executerEffetDisparition(cible);
 	}
 
 	@Override
 	public void executerAction(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
+		if (cible == null) throw new HearthstoneException("Cible d'attaque invalide !");
+		Plateau uniquePlateau = null;
+		uniquePlateau = (Plateau) uniquePlateau.getInstance();
+		IJoueur adversaire=uniquePlateau.getAdversaire(uniquePlateau.getJoueurCourant());
+		if(cible instanceof Heros) {
+			if(adversaire.isProvocation())
+				throw new HearthstoneException("Serviteur avec provocation sur le terrain adverse !");
+			else 
+				((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie()-this.getPointAttaque());
+		}
+		else {
+			if(cible instanceof Serviteur) {
+				if(adversaire.isProvocation() && (!(((Serviteur) cible).getCapacite() instanceof Provocation)))
+					throw new HearthstoneException("Serviteur avec provocation sur le terrain adverse !");
+				else {
+					((Serviteur) cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-this.getPointAttaque());
+					this.setPointDeVie(this.getPointDeVie()-((Serviteur) cible).getPointAttaque());
+				}
+			}
+			else throw new HearthstoneException("Cible d'attaque incorrecte ! ");
+		}
 	}
 	
 	public int getPointAttaque() {
@@ -69,8 +101,7 @@ public class Serviteur extends Carte {
 	
 	@Override
 	public boolean disparait() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getPointDeVie()<=0;
 	}
 
 	public void reduirePeuJouer() {
@@ -86,5 +117,8 @@ public class Serviteur extends Carte {
 	public int getPointDeVie() {
 		return this.pointDeVie;
 	}
-	
+
+	public String toString() {
+		return "[Serviteur] " +super.toString() + " --> "+ getPointDeVie()+" PV/ "+getPointAttaque()+" ATK";
+	}
 }

@@ -1,5 +1,8 @@
 package capacite;
 
+import jeu.HearthstoneException;
+import jeu.IJoueur;
+
 /**Cette classe représente la pioche d'une ou plusieurs cartes
 *
 *@author Badr Matthieu
@@ -8,7 +11,7 @@ public class Pioche extends Capacite {
 	private int nb;
 	
 	public Pioche(int nb) {
-		super("Pioche", "Vous piochez "+this.nb+" cartes.");
+		super("Pioche", "Vous piochez "+nb+" cartes.");
 		setNb(nb);
 	}
 	
