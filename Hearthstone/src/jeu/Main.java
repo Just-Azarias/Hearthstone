@@ -17,6 +17,7 @@ public class Main {
 		ArrayList<ICarte> j1;
 		ArrayList<ICarte> j2;
 		System.out.println("\n\n\n\n");
+		System.out.println("**************************************************");
 		System.out.println(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()));
 		System.out.println("\n===========================================");
 		j1=Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getJeu();
@@ -28,6 +29,9 @@ public class Main {
 		System.out.println(j2);
 		System.out.println("\n===========================================");
 		System.out.println(Plateau.getInstance().getJoueurCourant());
+		System.out.println("\n>>>>TOUR<<<<\n### Ta main ###\n###############\n"+ Plateau.getInstance().getJoueurCourant()
+				.getMain()+"\n###############");
+		System.out.println("**************************************************");
 	}
 	
 	private static void jouer() {

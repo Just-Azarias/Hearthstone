@@ -38,7 +38,10 @@ public class Sort extends Carte {
 	public void executerEffetFinTour() {}
 	
 	public String toString() {
-		return "[Sort] " +super.toString() + this.getCapacite() ;
+		String res;
+		res= "[Sort] " +super.toString();
+		if (this.getCapacite()!=null) res+= " --> "+this.getCapacite();
+		return res;
 	}
 
 	@Override

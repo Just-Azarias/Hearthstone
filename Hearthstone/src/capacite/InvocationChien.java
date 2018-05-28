@@ -11,7 +11,7 @@ import plateau.Plateau;
 */
 public class InvocationChien extends InvocationServiteur {
 	public InvocationChien(IJoueur joueur) throws HearthstoneException{
-		super("Lacher les chiens", "Invoque un chien 1/1 avec la capacité charge pour chaque serviteur sur le terrain adverse",
+		super("Lacher les chiens", "Invoque un chien 1/1 avec la capacite charge pour chaque serviteur sur le terrain adverse",
 		new Serviteur("Chien errant", 1, joueur, new Charge(), 1, 1), 0);
 	}
 	

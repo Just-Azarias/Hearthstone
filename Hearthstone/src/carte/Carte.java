@@ -36,7 +36,7 @@ public abstract class Carte implements ICarte {
 	}
 	
 	public String toString(){
-		return this.nom+" coute " + this.cout + "mana";
+		return this.nom+" coute " + this.cout + " mana";
 	}
 	
 }
