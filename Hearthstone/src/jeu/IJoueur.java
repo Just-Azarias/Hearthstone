@@ -190,4 +190,13 @@ public interface IJoueur {
 	 */
 	boolean isProvocation();
 
+	
+	/**
+	 * crée les cartes neutres que vont contenir tout les decks
+	 * @param liste
+	 * 				La liste a laquel ajouter les cartes
+	 * @throws HearthstoneException 
+	 */
+	void setCartesNeutre() throws HearthstoneException;
+
 }

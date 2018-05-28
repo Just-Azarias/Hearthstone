@@ -1,6 +1,7 @@
 package capacite;
 
 import jeu.HearthstoneException;
+import jeu.IJoueur;
 
 /**
 *Cette classe définit la capacite d'attaquer un heros à travers toute défense
@@ -21,5 +22,34 @@ public class AttaqueHeros extends Attaquer {
 			if(cible instanceof IJoueur)
 				cible=(Heros)
 		}
+	}
+
+	private void setDisponible(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void executerEffetDebutTour() throws HearthstoneException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void executerEffetDisparition(Object cible) throws HearthstoneException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void executerEffetFinTour() throws HearthstoneException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -51,11 +51,11 @@ public class Plateau implements IPlateau {
 		if(this.joueurs.size()!=2) throw new HearthstoneException("Nombre de joueurs Invalide !");
 		this.demarree=true;
 		this.setJoueurCourant(this.joueurs.get((new Random()).nextInt(2)));
-		for(int k=0;k<3;k++) {
-			uniquePlateau.getJoueurCourant().piocher();
-			uniquePlateau.getAdversaire(uniquePlateau.getJoueurCourant()).piocher();
-		}
-		this.getJoueurCourant().prendreTour();
+		//for(int k=0;k<3;k++) {
+			uniquePlateau.getJoueurCourant().prendreTour();
+			//uniquePlateau.getAdversaire(uniquePlateau.getJoueurCourant()).piocher();
+		//}
+		//this.getJoueurCourant().prendreTour();
 	}
 
 	@Override

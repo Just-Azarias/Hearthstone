@@ -20,13 +20,14 @@ public class Sort extends Carte {
 		/*On controle si on a assez de mana, et si oui, on utilise le sort
 		et on la supprime directement après, à revoir si on utilise des cartes
 		d'équipement*/
-		if(this.getCout() > Plateau.getPlateau().getJoueurCourant().getStockMana())
+		if(this.getCout() > Plateau.getInstance().getJoueurCourant().getStockMana())
 			throw new HearthstoneException("Mana Insufisant");
 		else {
 			this.getCapacite().executerEffetMiseEnJeu(cible);
-			Plateau.getPlateau().getJoueurCourant().getMain().remove(this);
+			Plateau.getInstance().getJoueurCourant().getMain().remove(this);
 		}
 	}
+	
 	
 	public void executerAction(Object cible) {}
 	
@@ -37,7 +38,7 @@ public class Sort extends Carte {
 	public void executerEffetFinTour() {}
 	
 	public String toString() {
-		return "Sort " + super.toString();
+		return "[Sort] " +super.toString() + this.getCapacite() ;
 	}
 
 	@Override

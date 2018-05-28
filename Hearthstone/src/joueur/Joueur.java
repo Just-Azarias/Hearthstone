@@ -13,26 +13,27 @@ public class Joueur implements IJoueur {
 	public final static int MAX_MANA=10;
 	public final static int TAILLE_DECK = 15;
 	public Heros heros;
-	public ArrayList<ICarte> deck;
+	private ArrayList<ICarte> deck;
 	public ArrayList<ICarte> main;
 	public ArrayList<ICarte> cartePlateau;
 	public int mana;
 	public int stockMana;
 	public String pseudo;
 	
-	public Joueur(String pseudo, Heros heros, ArrayList<ICarte> deck) {
+	public Joueur(String pseudo, Heros heros) throws HearthstoneException {
+
+		this.deck=new ArrayList<ICarte>();
 		setPseudo(pseudo);
 		setHeros(heros);
-		this.deck=deck;
+		this.setCartesNeutre();
+		if (heros.getNom().contains("Jaina")) this.setCartesJaina(this.deck);
+		else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
+		else new HearthstoneException("héros non initialiser");
 		melanger();
-		//this.setCartesNeutre(this.deck);
-		//if (heros.getNom().contains("Jaina")) this.setCartesJaina(this.deck);
-		//else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
-		//else new HearthstoneException("héros non initialiser");
 	}
 	
 	public void melanger() {
-		Collections.shuffle(deck);
+		Collections.shuffle(this.deck);
 	}
 	
     public boolean isProvocation() {
@@ -43,41 +44,45 @@ public class Joueur implements IJoueur {
     }
 
     @Override
-	public void setCartesNeutre(ArrayList<ICarte> liste) {
-			liste.add(new Serviteur("Chasse-marée	murloc ", 2, this,null, 2,1));
-			liste.add(new Sort("Charge",1,this,null));
-			liste.add(new Sort("Attaque mentale", 2, this,null ));
-			liste.add(new Serviteur("Champion de Hurlevent", 7, this,null , 6, 6));
-			liste.add(new Serviteur("Chef de raid", 3, this,new EffetPermanent("Bonus du chef de raid","Effet permanent sur les autres serviteurs alliés", 1, 0),2,2));
-			liste.add(new Serviteur("Garde de Baie-du-butin", 5, this,new Provocation(), 5, 4));
-			liste.add(new Serviteur("La missiliere temeraire", 6, this,null, 5, 2));
-			liste.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
-			liste.add(new Serviteur("Archimage", 6, this,new Provocation(), 4, 7));
-			liste.add(new Serviteur("Gnome lepreux", 1, this,new "attaque de lebreux", 1, 1));
-			liste.add(new Serviteur("Golem de moissons", 3, this,new Golemisation(this), 2, 3));
+    public void setCartesNeutre() throws HearthstoneException {
+			this.deck.add(new Serviteur("Chasse-marée	murloc ", 2, this,null, 2,1));
+			this.deck.add(new Sort("Charge",1,this,null));
+			this.deck.add(new Sort("Attaque mentale", 2, this,null ));
+			this.deck.add(new Serviteur("Champion de Hurlevent", 7, this,null , 6, 6));
+			this.deck.add(new Serviteur("Chef de raid", 3, this,new EffetPermanent("Bonus du chef de raid","Effet permanent sur les autres serviteurs alliés", 1, 0),2,2));
+			this.deck.add(new Serviteur("Garde de Baie-du-butin", 5, this,new Provocation(), 5, 4));
+			this.deck.add(new Serviteur("La missiliere temeraire", 6, this,null, 5, 2));
+			this.deck.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
+			this.deck.add(new Serviteur("Archimage", 6, this,new Provocation(), 4, 7));
+			this.deck.add(new Serviteur("Gnome lepreux", 1, this,new AttaqueCible("Attaque de lepreux","Inflige 2 de degat", 2), 1, 1));
+			this.deck.add(new Serviteur("Golem de moissons", 3, this,new Golemisation(this), 2, 3));
 	}
 	
-	public void setCartesJaina(ArrayList<ICarte> liste) {
-		liste.add(new Sort("Choc de flamme", 7,this,null)); //attaque massive
-		liste.add(new Sort("Eclair de givre",2,this,null)); //attaque du givre
-		liste.add(new Sort("Intelligence des arcanes", 2,this,null)); //pioche 2 cartes
-		liste.add(new Sort("Image mirroir",1,this,new ImageMiroir()));
-		liste.add(new Sort("Explosion pyrotechnique", 10, this, null)); //explosion pyrotechnique
+	public void setCartesJaina(ArrayList<ICarte> deck2) {
+		deck2.add(new Sort("Choc de flamme", 7,this,null)); //attaque massive
+		deck2.add(new Sort("Eclair de givre",2,this,null)); //attaque du givre
+		deck2.add(new Sort("Intelligence des arcanes", 2,this,null)); //pioche 2 cartes
+		deck2.add(new Sort("Image mirroir",1,this,new ImageMiroir()));
+		deck2.add(new Sort("Explosion pyrotechnique", 10, this, null)); //explosion pyrotechnique
 	}
 	
-	public void setCartesRexxar(ArrayList<ICarte> liste) {
-		liste.add(new Serviteur("Busard affame", 5,this,null, 3, 2)); //pioche une carte
-		liste.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
-		liste.add(new Sort("Tir des arcanes", 1,this,null)); //Tir des arcanes
-		liste.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this))); //pas une ICapacité le invocationChien
-		liste.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
+	public void setCartesRexxar(ArrayList<ICarte> deck2) throws HearthstoneException {
+		
+		deck2.add(new Serviteur("Busard affame", 5,this,null, 3, 2)); //pioche une carte
+		deck2.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
+		deck2.add(new Sort("Tir des arcanes", 1,this,null)); //Tir des arcanes
+		deck2.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this))); //pas une ICapacité le invocationChien
+		deck2.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
 	}
 	
 	public boolean equals(Object joueur) {
 		if (joueur==null) return false;
 		if (this!=joueur) return false;
 		if (!(joueur instanceof IJoueur)) return false;
-		if (((Joueur)joueur).
+		if (((Joueur)joueur).getHeros()!=this.getHeros()) return false;
+		if (((Joueur)joueur).getPseudo()!=this.getPseudo()) return false;
+		if (((Joueur)joueur).getJeu()!=this.getJeu()) return false;
+		return true;
 	}
 	
 	public void setHeros(Heros heros){
@@ -133,13 +138,14 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void prendreTour() throws HearthstoneException {
-		if (this.getMana()<MAXMANA) this.mana++;
+		if (this.getMana()<MAX_MANA) this.mana++;
 		this.stockMana=this.mana;
 		for(ICarte n:this.cartePlateau) {
 			if (n instanceof Serviteur) {
 				if (((Serviteur) n).getPeuJouer()>0) ((Serviteur) n).reduirePeuJouer();
 			}
 		}
+		piocher();
 	}
 
 	@Override
@@ -159,7 +165,7 @@ public class Joueur implements IJoueur {
 			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
 			this.getMain().remove(carte);
 			if (carte instanceof Serviteur) {
-				if (this.getJeu().size()>=MAXBOARD) throw new HearthstoneException("Plus de places sur le plateau");
+				if (this.getJeu().size()>=MAX_BOARD) throw new HearthstoneException("Plus de places sur le plateau");
 				this.cartePlateau.add(carte);
 			}
 			carte.executerEffetDebutMiseEnJeu(carte);
@@ -175,7 +181,7 @@ public class Joueur implements IJoueur {
 			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
 			this.getMain().remove(carte);
 			if (carte instanceof Serviteur) {
-				if (this.getJeu().size()>=MAXBOARD) throw new HearthstoneException("Plus de places sur le plateau");
+				if (this.getJeu().size()>=MAX_BOARD) throw new HearthstoneException("Plus de places sur le plateau");
 				this.cartePlateau.add(carte);
 			}
 			carte.executerEffetDebutMiseEnJeu(cible);
@@ -243,7 +249,7 @@ public class Joueur implements IJoueur {
 	public String toString() {
 		String res;
 		res=getPseudo()+" son héros est : "+getHeros();
-		//res=res+"\n Ses cartes sont :"+this.deck;  // patience, a voir losque les cartes fonctionneront niquel
+		res=res+"\n StockMana : "+this.getStockMana()+"\nPouvoir du heros : "+this.getHeros().getCapacite();
 		return res;
 	}
 
