@@ -25,7 +25,10 @@ public class Main {
 	}
 	private static void jouerCarte() throws HearthstoneException {
 		System.out.println("Laquelle?(Donne un bout de son nom)");
+		recup.nextLine();
 		choixStr=recup.nextLine();
+		System.out.println(choixStr);
+		System.out.println(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 	}
 	
@@ -85,7 +88,7 @@ public class Main {
 
 		char caracChoix;
 		String pseudo;
-		int i = 5; //pour les tests
+		int i = 50; //pour les tests
 		
 		
 		////////////////////création du joueur 1/////////////////////////

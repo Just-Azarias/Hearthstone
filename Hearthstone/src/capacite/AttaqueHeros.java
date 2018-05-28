@@ -15,11 +15,11 @@ public class AttaqueHeros extends Attaquer {
 		super(nom, description, degat);
 	}
 	
-	public void executerAction(Object cible) throws HearthstoneException {
+	public void executerAction(Object cible) throws HearthstoneException {/*
 		if (cible instanceof IJoueur) cible = (Heros) Plateau.getInstance().getAdversaire((IJoueur) cible).getHeros();
         if (!(cible instanceof Heros)) 
-        	throw new HearthstoneException("La cible doit être un héros.");
-        ((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie() - getDegat());
+        ((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie() - getDegat());*/
+		//////////////////////pas bon! pas besoin d'indiquer la cible, l'attaque doit etre automatique////////////////////////
 	}
 
 	@Override

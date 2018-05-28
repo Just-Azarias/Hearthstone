@@ -47,7 +47,7 @@ public class Joueur implements IJoueur {
 
     @Override
     public void setCartesNeutre() throws HearthstoneException {
-			this.deck.add(new Serviteur("Chasse-marée murloc ", 2, this,null, 2,1));
+			this.deck.add(new Serviteur("Chasse-marée murloc ", 2, this,new InvocationServiteur("Cri de guerre","Invoque un serviteur +1/+1" ,new  Serviteur("Eclaireur murloc", 0, this, 1, 1) ,1), 2,1));
 			this.deck.add(new Sort("Charge",1,this,null));
 			this.deck.add(new Sort("Attaque mentale", 2, this,null ));
 			this.deck.add(new Serviteur("Champion de Hurlevent", 7, this,null , 6, 6));
@@ -60,11 +60,11 @@ public class Joueur implements IJoueur {
 			this.deck.add(new Serviteur("Golem de moissons", 3, this,new Golemisation(this), 2, 3));
 	}
 	
-	public void setCartesJaina(ArrayList<ICarte> deck2) {
+	public void setCartesJaina(ArrayList<ICarte> deck2) throws HearthstoneException {
 		deck2.add(new Sort("Choc de flamme", 7,this,null)); //attaque massive
 		deck2.add(new Sort("Eclair de givre",2,this,null)); //attaque du givre
 		deck2.add(new Sort("Intelligence des arcanes", 2,this,null)); //pioche 2 cartes
-		deck2.add(new Sort("Image mirroir",1,this,new ImageMiroir()));
+		deck2.add(new Sort("Image mirroir",1,this,new ImageMiroir(this)));
 		deck2.add(new Sort("Explosion pyrotechnique", 10, this, null)); //explosion pyrotechnique
 	}
 	
@@ -170,7 +170,7 @@ public class Joueur implements IJoueur {
 	@Override
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
 		if (this.main.contains(carte)){
-			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
+			if (carte.getCout()>this.getStockMana()) new HearthstoneException("Pas assez de Mana");
 			this.getMain().remove(carte);
 			if (carte instanceof Serviteur) {
 				if (this.getJeu().size()>=MAX_BOARD) throw new HearthstoneException("Plus de places sur le plateau");
@@ -224,7 +224,7 @@ public class Joueur implements IJoueur {
 	public void utiliserPouvoir(Object cible) throws HearthstoneException {
 		if (this.heros.getPouvoir()) {
 			heros.getCapacite().executerAction(cible);
-			heros.setPouvoir(true);
+			heros.setPouvoir(false);
 		}
 		else
 			throw new HearthstoneException("le heros ne peut pas utiliser son pouvoir 2 fois");
