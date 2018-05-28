@@ -81,7 +81,7 @@ public class Main {
 		
 		//On instencie les héros ici//
 		Heros rexxar = new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 ));
-		Heros jaina = new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie ", 1 ));
+		Heros jaina = new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 ));
 
 		char caracChoix;
 		String pseudo;
