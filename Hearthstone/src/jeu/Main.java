@@ -11,12 +11,36 @@ import capacite.*;
 public class Main {
 	public static IJoueur joueur1;
 	public static IJoueur joueur2;
+	private static Scanner recup = new Scanner(System.in);
+	private static int choix;
+	private static String  choixStr;
+
 	
+	private static void sauterLigne(int i){
+		int j;
+		for (j=0;j<i;j++) System.out.println();
+	}
+	private static void passerTour() throws HearthstoneException {
+		Plateau.getInstance().getJoueurCourant().finirTour();
+	}
+	private static void jouerCarte() throws HearthstoneException {
+		System.out.println("Laquelle? (Donne un bout de son nom)");
+		choixStr=recup.nextLine();
+		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
+	}
+	
+	private static void UtiliserCarte() {
+		
+	}
+	
+	private static void UtiliserHeros() {
+		
+	}
 	
 	private static void afficherPlateau() throws HearthstoneException {
 		ArrayList<ICarte> j1;
 		ArrayList<ICarte> j2;
-		System.out.println("\n\n\n\n");
+		sauterLigne(4);
 		System.out.println("**************************************************");
 		System.out.println(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()));
 		System.out.println("\n===========================================");
@@ -34,11 +58,23 @@ public class Main {
 		System.out.println("**************************************************");
 	}
 	
-	private static void jouer() {
-		
+	private static void jouer() throws HearthstoneException {
+		sauterLigne(4);
+		System.out.println("Que veux-tu faire? \n1. Finir le tour \n2. Jouer une carte de ta main \n3. Utiliser une carte en jeu \n4. Utiliser le pouvoir du heros \n\n-->");
+		do {
+			System.out.println("entrez 1,2,3 ou 4 selon votre choix");
+			choix = recup.nextInt();
+		}while (choix != 1 &&choix!= 2 &&choix!= 4 &&choix!= 4);
+		if (choix==1) passerTour();
+		else if (choix==2)jouerCarte();
+		else if (choix==3)UtiliserCarte();
+		else if (choix==4)UtiliserHeros();
+		else throw new HearthstoneException("probleme choix du jeu");
 	}
 
 	
+
+
 	public static void main(String[] args) throws HearthstoneException {
 		
 
@@ -47,21 +83,20 @@ public class Main {
 		Heros rexxar = new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 ));
 		Heros jaina = new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 ));
 
-		Scanner recup = new Scanner(System.in);
-		String choix;
 		char caracChoix;
 		String pseudo;
+		int i = 5; //pour les tests
 		
 		
 		////////////////////création du joueur 1/////////////////////////
-		/*System.out.println("Bonjours, veuillez entrer votre pseudo (joueur 1) :");
-		pseudo = recup.nextLine();*/
+		/*System.out.println("Bonjours, veuillez entrer votre pseudo (joueur 1) :");*/
+		//pseudo = recup.nextLine();
 		pseudo="test cartes";
 		
 		System.out.println("Bonjours "+pseudo+" quel héros voulez-vous jouer? \nEntrez seulement la premiere lettre (seul Jaina et Rexxar sont disponible pour le moment)");
 		/*do {
-			choix = recup.nextLine();
-			caracChoix = choix.charAt(0);
+			choixStr = recup.nextLine();
+			caracChoix = choixStr.charAt(0);
 		}while(caracChoix != 'j' && caracChoix != 'J' && caracChoix != 'r' && caracChoix != 'R');*/
 		caracChoix='r';
 		if (caracChoix=='j'||caracChoix=='J') {
@@ -81,8 +116,8 @@ public class Main {
 		pseudo="ceci est aussi un test ";
 		System.out.println("Bonjours "+pseudo+" quel héros voulez-vous jouer? \nEntrez seulement la premiere lettre (seul Jaina et Rexxar sont disponible pour le moment)");
 		/*do {
-			choix = recup.nextLine();
-			caracChoix = choix.charAt(0);
+			choixStr = recup.nextLine();
+			caracChoix = choixStr.charAt(0);
 		}while(caracChoix != 'j' && caracChoix != 'J' && caracChoix != 'r' && caracChoix != 'R');
 		*/
 		caracChoix='R';
@@ -102,11 +137,12 @@ public class Main {
 
 		////////////////////Début de la partie////////////////////////////////////////
 		Plateau.getInstance().demarrerPartie();
-		//while (Plateau.getInstance().getJoueurCourant().getHeros().getPointDeVie()>0) {
-			System.out.println("\n\n\n\n\n\n\n\n");
+		while (/*Plateau.getInstance().getJoueurCourant().getHeros().getPointDeVie()>0*/i>0) {
+			sauterLigne(8);
 			afficherPlateau();
 			jouer();
-		//}
+			i--;
+		}
 		
 	}
 

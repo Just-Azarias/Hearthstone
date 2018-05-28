@@ -65,7 +65,7 @@ public class Plateau implements IPlateau {
 
 	@Override
 	public void finTour(IJoueur joueur) throws HearthstoneException {
-		this.getJoueurCourant().finirTour();
+		//this.getJoueurCourant().finirTour();
 		this.setJoueurCourant(this.getAdversaire(joueur));
 		this.getJoueurCourant().prendreTour();
 	}

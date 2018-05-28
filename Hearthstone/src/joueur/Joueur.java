@@ -47,7 +47,7 @@ public class Joueur implements IJoueur {
 
     @Override
     public void setCartesNeutre() throws HearthstoneException {
-			this.deck.add(new Serviteur("Chasse-marée murloc ", 2, this,new InvocationServiteur(""), 2,1));
+			this.deck.add(new Serviteur("Chasse-marée murloc ", 2, this,null, 2,1));
 			this.deck.add(new Sort("Charge",1,this,null));
 			this.deck.add(new Sort("Attaque mentale", 2, this,null ));
 			this.deck.add(new Serviteur("Champion de Hurlevent", 7, this,null , 6, 6));
@@ -154,7 +154,11 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void finirTour() throws HearthstoneException{
-		if (Plateau.getInstance().getJoueurCourant().equals(this)) for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
+		if (Plateau.getInstance().getJoueurCourant().equals(this)) {
+			for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
+			Plateau.getInstance().finTour(this);
+			Plateau.getInstance().getAdversaire(this).prendreTour();
+		}
 	}
 
 	@Override

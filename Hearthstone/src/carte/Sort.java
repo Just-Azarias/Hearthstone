@@ -39,8 +39,9 @@ public class Sort extends Carte {
 	
 	public String toString() {
 		String res;
-		res= "[Sort] " +super.toString();
+		res= "\n##[[Sort] " +super.toString();
 		if (this.getCapacite()!=null) res+= " --> "+this.getCapacite();
+		res+="]";
 		return res;
 	}
 
