@@ -1,7 +1,9 @@
 package capacite;
 
 import jeu.HearthstoneException;
+import jeu.Heros;
 import jeu.IJoueur;
+import plateau.Plateau;
 
 /**
 *Cette classe d√©finit la capacite d'attaquer un heros √† travers toute d√©fense
@@ -14,42 +16,21 @@ public class AttaqueHeros extends Attaquer {
 	}
 	
 	public void executerAction(Object cible) throws HearthstoneException {
-		if(!(cible instance))
-		if(this.isDisponible()==false)
-			throw new HearthstoneException("Pouvoir heroique utilisable 1 seul fois par tour !");
-		else {
-			this.setDisponible(false);
-			if(cible instanceof IJoueur)
-				cible=(Heros)
-		}
-	}
-
-	private void setDisponible(boolean b) {
-		// TODO Auto-generated method stub
-		
+		if (cible instanceof IJoueur) cible = (Heros) Plateau.getInstance().getAdversaire((IJoueur) cible).getHeros();
+        if (!(cible instanceof Heros)) 
+        	throw new HearthstoneException("La cible doit Ítre un hÈros.");
+        ((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie() - getDegat());
 	}
 
 	@Override
-	public void executerEffetDebutTour() throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void executerEffetDebutTour() throws HearthstoneException {	}
 
 	@Override
-	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void executerEffetDisparition(Object cible) throws HearthstoneException {}
 
 	@Override
-	public void executerEffetFinTour() throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void executerEffetFinTour() throws HearthstoneException {}
 
 	@Override
-	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
-		// TODO Auto-generated method stub
-		
-	}
+	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {}
 }

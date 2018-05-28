@@ -16,7 +16,7 @@ public class InvocationChien extends InvocationServiteur {
 	}
 	
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
-		this.nb=Plateau.getInstance().getAdversaire((IJoueur) cible).getJeu().size();
+		this.setNb(Plateau.getInstance().getAdversaire((IJoueur) cible).getJeu().size());
 		super.executerAction(cible);
 	}
 }
