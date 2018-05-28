@@ -22,11 +22,16 @@ public class Serviteur extends Carte {
 		setPointDeVie(PV);
 	}
 	
+	public Serviteur(String nom, int cout, IJoueur proprietaire, int attaque, int PV) throws HearthstoneException {
+		super(nom, cout, proprietaire, null);
+		setPointAttaque(attaque);
+		setPointDeVie(PV);
+	}
+	
 	public Serviteur(Serviteur serviteur)throws HearthstoneException {
 		super(serviteur.getNom(), serviteur.getCout(), serviteur.getProprietaire(), serviteur.getCapacite());
 		setPointAttaque(serviteur.getPointAttaque());
 		setPointDeVie(serviteur.getPointDeVie());
-		
 	}
 	
 	public void setPointAttaque(int attaque) throws HearthstoneException {
