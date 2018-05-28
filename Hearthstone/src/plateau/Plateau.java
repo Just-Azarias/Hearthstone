@@ -3,8 +3,10 @@ package plateau;
 import java.util.ArrayList;
 import java.util.Random;
 
-import jeu.*;
-import joueur.*;
+import jeu.HearthstoneException;
+import jeu.IJoueur;
+import jeu.IPlateau;
+
 
 public class Plateau implements IPlateau {
 	private ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();

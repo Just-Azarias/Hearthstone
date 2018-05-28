@@ -72,6 +72,13 @@ public class Joueur implements IJoueur {
 		liste.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
 	}
 	
+	public boolean equals(Object joueur) {
+		if (joueur==null) return false;
+		if (this!=joueur) return false;
+		if (!(joueur instanceof IJoueur)) return false;
+		if (((Joueur)joueur).
+	}
+	
 	public void setHeros(Heros heros){
 		this.heros=heros;
 	}
@@ -136,7 +143,7 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void finirTour() throws HearthstoneException{
-		if (UniquePlateau.getInstance().getJoueurCourant().equals(this) for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
+		if (Plateau.getInstance().getJoueurCourant().equals(this)) for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
 	}
 
 	@Override
