@@ -113,7 +113,7 @@ public class Main {
 		////////////////////création du joueur 2/////////////////////////
 		System.out.println("Bonjours, veuillez entrer votre pseudo (joueur 2) :");
 		//pseudo = recup.nextLine();
-		pseudo="ceci est aussi un test ";
+		pseudo="ceci est aussi un test";
 		System.out.println("Bonjours "+pseudo+" quel héros voulez-vous jouer? \nEntrez seulement la premiere lettre (seul Jaina et Rexxar sont disponible pour le moment)");
 		/*do {
 			choixStr = recup.nextLine();
