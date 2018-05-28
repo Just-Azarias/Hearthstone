@@ -3,6 +3,8 @@ package jeu;
 import plateau.*;
 import joueur.*;
 import carte.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 import capacite.*;
 
@@ -11,15 +13,27 @@ public class Main {
 	public static IJoueur joueur2;
 	
 	
-	private static void afficherPlateau() {
+	private static void afficherPlateau() throws HearthstoneException {
+		ArrayList<ICarte> j1;
+		ArrayList<ICarte> j2;
+		System.out.println("\n\n\n\n");
+		System.out.println(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()));
 		System.out.println("\n===========================================");
-		
+		j1=Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getJeu();
+		System.out.println(j1);
 		System.out.println("\n===========================================");
 		System.out.println("\n-------------------------------------------");
 		System.out.println("\n===========================================");
-		
+		j2=Plateau.getInstance().getJoueurCourant().getJeu();
+		System.out.println(j2);
 		System.out.println("\n===========================================");
+		System.out.println(Plateau.getInstance().getJoueurCourant());
 	}
+	
+	private static void jouer() {
+		
+	}
+
 	
 	public static void main(String[] args) throws HearthstoneException {
 		
@@ -84,13 +98,13 @@ public class Main {
 
 		////////////////////Début de la partie////////////////////////////////////////
 		Plateau.getInstance().demarrerPartie();
-		System.out.println("\n\n\n\n");
-		System.out.println("Le joueur 1 est : "+ joueur1);
-		afficherPlateau();
-		System.out.println("Le joueur 2 est : "+ joueur2);
+		//while (Plateau.getInstance().getJoueurCourant().getHeros().getPointDeVie()>0) {
+			System.out.println("\n\n\n\n\n\n\n\n");
+			afficherPlateau();
+			jouer();
+		//}
 		
 	}
-
 
 
 }

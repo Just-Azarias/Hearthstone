@@ -23,6 +23,8 @@ public class Joueur implements IJoueur {
 	public Joueur(String pseudo, Heros heros) throws HearthstoneException {
 
 		this.deck=new ArrayList<ICarte>();
+		this.cartePlateau=new ArrayList<ICarte>();
+		this.main=new ArrayList<ICarte>();
 		setPseudo(pseudo);
 		setHeros(heros);
 		this.setCartesNeutre();
@@ -140,12 +142,14 @@ public class Joueur implements IJoueur {
 	public void prendreTour() throws HearthstoneException {
 		if (this.getMana()<MAX_MANA) this.mana++;
 		this.stockMana=this.mana;
-		for(ICarte n:this.cartePlateau) {
-			if (n instanceof Serviteur) {
-				if (((Serviteur) n).getPeuJouer()>0) ((Serviteur) n).reduirePeuJouer();
+		piocher();
+		if (this.cartePlateau!=null) {
+			for(ICarte n:this.cartePlateau) {
+				if (n instanceof Serviteur) {
+					if (((Serviteur) n).getPeuJouer()>0) ((Serviteur) n).reduirePeuJouer();
+				}
 			}
 		}
-		piocher();
 	}
 
 	@Override
@@ -155,8 +159,8 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void piocher() throws HearthstoneException {
-		main.add(deck.get(0));
-		deck.remove(0);
+		this.main.add(this.deck.get(0));
+		this.deck.remove(0);
 	}
 
 	@Override
@@ -245,11 +249,12 @@ public class Joueur implements IJoueur {
 	public Heros getHeros() {
 		return this.heros;
 	}
+
 	
 	public String toString() {
 		String res;
 		res=getPseudo()+" son héros est : "+getHeros();
-		res=res+"\n StockMana : "+this.getStockMana()+"\nPouvoir du heros : "+this.getHeros().getCapacite();
+		res=res+"\nStockMana : "+this.getStockMana()+"\nPouvoir du heros : "+this.getHeros().getCapacite();
 		return res;
 	}
 
