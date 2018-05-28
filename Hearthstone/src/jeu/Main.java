@@ -24,7 +24,7 @@ public class Main {
 		Plateau.getInstance().getJoueurCourant().finirTour();
 	}
 	private static void jouerCarte() throws HearthstoneException {
-		System.out.println("Laquelle? (Donne un bout de son nom)");
+		System.out.println("Laquelle?(Donne un bout de son nom)");
 		choixStr=recup.nextLine();
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 	}
