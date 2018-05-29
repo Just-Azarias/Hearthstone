@@ -32,12 +32,11 @@ public class Main {
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 	}
 	
-	private static void UtiliserCarte() {
-		
+	private static void UtiliserCarte() throws HearthstoneException {
 	}
-	
-	private static void UtiliserHeros() {
-		
+	private static void UtiliserHeros() throws HearthstoneException {
+		System.out.println("Voulez-Vous cibler un heros ou une carte?");
+		Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getHeros());
 	}
 	
 	private static void afficherPlateau() throws HearthstoneException {
