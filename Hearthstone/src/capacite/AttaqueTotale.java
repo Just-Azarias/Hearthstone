@@ -16,7 +16,7 @@ public class AttaqueTotale extends Attaquer {
 		super(nom, description, degat);
 	}
 	
-	public void executerAction(Object cible)throws HearthstoneException {
+	public void executerAction(Object cible)throws HearthstoneException { //c pas une putain de cible 
 		if(cible instanceof IJoueur) {
 			for(ICarte carte : Plateau.getInstance().getAdversaire((IJoueur) cible).getJeu())
 				((Serviteur) carte).setPointDeVie(((Serviteur) carte).getPointDeVie() - getDegat());
