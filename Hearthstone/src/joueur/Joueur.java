@@ -61,20 +61,20 @@ public class Joueur implements IJoueur {
 	}
 	
 	public void setCartesJaina(ArrayList<ICarte> deck2) throws HearthstoneException {
-		deck2.add(new Sort("Choc de flamme", 7,this,null)); //attaque massive
-		deck2.add(new Sort("Eclair de givre",2,this,null)); //attaque du givre
-		deck2.add(new Sort("Intelligence des arcanes", 2,this,null)); //pioche 2 cartes
+		deck2.add(new Sort("Choc de flamme", 7,this,new AttaqueTotale("Attaque massive","Inflige 4 points de degats a tous les serviteurs adverses", 4)));
+		deck2.add(new Sort("Eclair de givre",2,this,new AttaqueCible("Attaque du givre","Inflige 3 points de degats  au personnage cible",3)));
+		deck2.add(new Sort("Intelligence des arcanes", 2,this,new Pioche(2))); 
 		deck2.add(new Sort("Image mirroir",1,this,new ImageMiroir(this)));
-		deck2.add(new Sort("Explosion pyrotechnique", 10, this, null)); //explosion pyrotechnique
+		deck2.add(new Sort("Explosion pyrotechnique", 10, this, new AttaqueCible("Explosion pyrotechnique","Inflige 10 points de degats  au personnage cible",10))); 
 	}
 	
 	public void setCartesRexxar(ArrayList<ICarte> deck2) throws HearthstoneException {
 		
-		deck2.add(new Serviteur("Busard affame", 5,this,null, 3, 2)); //pioche une carte
+		deck2.add(new Serviteur("Busard affame", 5,this,new Pioche(1), 3, 2)); 
 		deck2.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
-		deck2.add(new Sort("Tir des arcanes", 1,this,null)); //Tir des arcanes
-		deck2.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this))); //pas une ICapacité le invocationChien
-		deck2.add(new Sort("Ordre de tuer", 3,this,null)); //ordre de tuer (inflige 3 pts de degats au pers ciblé)
+		deck2.add(new Sort("Tir des arcanes", 1,this,new AttaqueCible("Tir des aecanes","Inflige 2 points de degats  au personnage cible",2)));
+		deck2.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this)));
+		deck2.add(new Sort("Ordre de tuer", 3,this,new AttaqueCible("Ordre de tuer","Inflige 3 points de degats  au personnage cible",3)));
 	}
 	
 	public boolean equals(Object joueur) {
