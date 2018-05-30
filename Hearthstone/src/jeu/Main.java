@@ -45,12 +45,13 @@ public class Main {
 			choix=recup.nextInt();
 			recup.nextLine();
 		}while(choix!=1&&choix!=2);
-		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(null);
+		IJoueur adversaire = Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant());
+		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(adversaire.getHeros());
 		else {
 			System.out.println("Laquelle? (Donne un bout de son nom)");
 			//viderBuffer();
 			choixStr=recup.nextLine();
-			Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr));
+			Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(adversaire.getCarteEnJeu(choixStr));
 		}
 	}
 	
@@ -119,7 +120,7 @@ public class Main {
 			choixStr = recup.nextLine();
 			caracChoix = choixStr.charAt(0);
 		}while(caracChoix != 'j' && caracChoix != 'J' && caracChoix != 'r' && caracChoix != 'R');*/
-		caracChoix='r';
+		caracChoix='j';
 		if (caracChoix=='j'||caracChoix=='J') {
 			joueur1 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 )));
 		}
@@ -141,7 +142,7 @@ public class Main {
 			caracChoix = choixStr.charAt(0);
 		}while(caracChoix != 'j' && caracChoix != 'J' && caracChoix != 'r' && caracChoix != 'R');
 		*/
-		caracChoix='R';
+		caracChoix='j';
 		if (caracChoix=='j'||caracChoix=='J') {
 			joueur2 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 )));
 		}

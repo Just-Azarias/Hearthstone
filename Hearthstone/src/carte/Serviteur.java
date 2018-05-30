@@ -40,7 +40,6 @@ public class Serviteur extends Carte {
 	}
 
 	public void setPointDeVie(int PV) throws HearthstoneException {
-		if(PV<=0) throw new HearthstoneException("Point de vie incorrecte !");
 		this.pointDeVie=PV;
 	}
 	

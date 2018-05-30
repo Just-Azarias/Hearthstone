@@ -3,7 +3,6 @@ package jeu;
 /**
  * Le plateau gère toute la partie, notamment le début et la fin de partie. Il sait qui est le joueur
  * courant, qui est l'adversaire d'un joueur, etc. Il n'y a qu'un seul plateau en tout et pour tout. 
- * Je vous conseille de faire quelques recherche sur le design pattern 'Singleton'
  */
 public interface IPlateau {
         /**
@@ -15,14 +14,14 @@ public interface IPlateau {
         
         /**
          * Renvoie le joueur courant, c'est-à-dire celui qui a le tour et qui doit jouer
-         * @return le joueur courant, ou null si la partie n'est pas démarrée
+         * @return le joueur courant
          */
         IJoueur getJoueurCourant();
         
         /**
          * Le setter qui va avec le getter
          * @param joueur Le nouveau joueur courant
-         * @throws HearthstoneException si le nouveau joueur est null, etc. (faut tout tester naturellement)
+         * @throws HearthstoneException si le nouveau joueur est null, etc. 
          */
         void setJoueurCourant(IJoueur joueur) throws HearthstoneException;
         
@@ -35,7 +34,7 @@ public interface IPlateau {
         IJoueur getAdversaire(IJoueur joueur) throws HearthstoneException;
 
         /**
-         * Ca démarre la partie. Il faut déterminer aléatoirement le joueur qui commence, etc.
+         * Ca démarre la partie. Ca determine aleatoirement qui commence
          * @throws HearthstoneException si 2 joueurs ne sont pas ajoutés, etc
          */
         void demarrerPartie() throws HearthstoneException;
@@ -47,10 +46,9 @@ public interface IPlateau {
         
         /**
          * Le joueur passé en paramètre vient de décider de finir son tour. Du coup, le plateau
-         * doit gérer le changement de joueur courant (entre autres)
+         *  gere le changement de joueur courant 
          * @param joueur le joueur qui a fini son tour et qui passe la main
-         * @throws HearthstoneException si le joueur qui passe son tour, n'avait pas le tour, alors
-         * c'est qu'il fait n'importe quoi !
+         * @throws HearthstoneException pour que prendreTour et setJoueurCourant fonctionnent
          */
         void finTour(IJoueur joueur) throws HearthstoneException;
         
