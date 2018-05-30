@@ -2,7 +2,6 @@ package jeu;
 
 import plateau.*;
 import joueur.*;
-import carte.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +14,6 @@ public class Main {
 	private static int choix,i;
 	private static String  choixStr, choixStr2;
 
-	
 	private static void sauterLigne(int i){
 		int j;
 		for (j=0;j<i;j++) System.out.println();
@@ -25,7 +23,7 @@ public class Main {
 	}
 	private static void jouerCarte() throws HearthstoneException {
 		System.out.println("Laquelle?(Donne un bout de son nom)");
-		//recup.nextLine();
+		//viderBuffer();
 		choixStr=recup.nextLine();
 		System.out.println(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
@@ -33,19 +31,24 @@ public class Main {
 	
 	private static void UtiliserCarte() throws HearthstoneException {
 		System.out.println("Laquelle? (Donne un bout de son nom)");
+		//viderBuffer();
 		choixStr=recup.nextLine();
 		System.out.println("Quel cible? (Donne un bout de son nom)");
+		//viderBuffer();
 		choixStr2=recup.nextLine();
 		Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr).executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr2));
 	}
 	private static void UtiliserHeros() throws HearthstoneException {
 		do {
 			System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
+			//viderBuffer();
 			choix=recup.nextInt();
+			recup.nextLine();
 		}while(choix!=1&&choix!=2);
 		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(null);
 		else {
 			System.out.println("Laquelle? (Donne un bout de son nom)");
+			//viderBuffer();
 			choixStr=recup.nextLine();
 			Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr));
 		}
@@ -82,9 +85,9 @@ public class Main {
 		sauterLigne(4);
 		System.out.println("Que veux-tu faire? \n1. Finir le tour \n2. Jouer une carte de ta main \n3. Utiliser une carte en jeu \n4. Utiliser le pouvoir du heros \n\n-->");
 		do {
-			recup.nextInt();
 			System.out.println("entrez 1,2,3 ou 4 selon votre choix");
 			choix = recup.nextInt();
+			recup.nextLine();
 		}while (choix != 1 &&choix!= 2 &&choix!= 4 &&choix!= 4 &&choix!=5);
 		if (choix==1) passerTour();
 		else if (choix==2)jouerCarte();

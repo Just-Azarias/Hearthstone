@@ -18,8 +18,8 @@ public class InvocationServiteur extends Capacite{
 	}
 	
 	public void executerAction(Object cible) throws HearthstoneException {
-		Plateau plateau=null;
-		IJoueur courant=((Plateau) plateau).getInstance().getJoueurCourant();
+		//Plateau plateau=null;
+		IJoueur courant=Plateau.getInstance().getJoueurCourant();
 		int nombre=(courant.getJeu().size()+getNb() > courant.MAX_BOARD)? courant.MAX_BOARD-courant.getJeu().size() : getNb();
 		for(int k=0; k<nombre; k++) {
 			courant.getJeu().add(new Serviteur(getServiteur()));
