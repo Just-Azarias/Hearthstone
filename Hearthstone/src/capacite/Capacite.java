@@ -9,7 +9,7 @@ import jeu.*;
 public abstract class Capacite implements ICapacite {
 	private String nom;
 	private String description;
-	private boolean disponible = true ; // capacite héroïque 1 fois par tour
+	private boolean disponible = true ; 
 	
 	public Capacite(String nom, String description) {
 		this.nom = nom;

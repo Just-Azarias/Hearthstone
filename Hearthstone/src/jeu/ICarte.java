@@ -1,9 +1,16 @@
 package jeu;
 
 /**
- * Une carte du jeu peut être
- * une carte de sort ou une carte serviteur.
- * @see IJoueur
+ * 	Une carte du jeu, elle peut etre une carte de sort ou une carte serviteur.
+ *	Une carte est caracterise par les informations suivante:
+ *	un nom
+ *	une cout en mana
+ *	son proprietaire
+ *	sa capacite
+ * 	@see ICarte
+ * 	@author Bader Matthieu
+ * 	@version 2.4
+ * 	@see ICapacite
  */
 public interface ICarte extends Cloneable {
         

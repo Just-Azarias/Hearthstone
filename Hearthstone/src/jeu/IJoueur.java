@@ -3,8 +3,18 @@ package jeu;
 import java.util.ArrayList;
 
 /**
- * Cette interface définit le comportement (normalement) minimal d'un joueur
- *
+ * 	Cette interface définit le comportement (normalement) minimal d'un joueur
+ *	Une capacite est caracterise par les informations suivante:
+ *	un pseudo le nom que le joueur entre en debut de partie
+ *	Le heros que le joueur a aussi choisi dans le main
+ *	Les cartes qui seront dans sa main
+ *	Les cartes qui seront sur le plateau
+ *	Les cartes qui composent son deck
+ *	Son mana mana max qu'il est incrementer de 1 a chaque debut de tour
+ *	Son StockMana  c'est celui qui est utilise lors de l'utilisation d'une carte
+ * 	@see ICarte
+ * 	@author Bader Matthieu
+ * 	@version 3.5
  */
 public interface IJoueur {
 

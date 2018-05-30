@@ -1,8 +1,14 @@
 package jeu;
 
 /**
- * Le plateau gère toute la partie, notamment le début et la fin de partie. Il sait qui est le joueur
- * courant, qui est l'adversaire d'un joueur, etc. Il n'y a qu'un seul plateau en tout et pour tout. 
+ * >La classe plateau gere tout ce qui se passe au niveau des deux joueur, le courant et l'adversaire
+ * Elle est composee de :
+ * l'unique plateau, objet Plateau unique sur lequel tout le jeu se deroule
+ * Joueur courant le joueur qui doit jouer
+ * demaree booleen pour savoir si la partie est demaree ou non
+ * @see IJoueur
+ * @author Bader Matthieu
+ * @version 2.3
  */
 public interface IPlateau {
         /**

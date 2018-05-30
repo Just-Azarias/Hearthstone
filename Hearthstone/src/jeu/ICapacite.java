@@ -2,6 +2,13 @@ package jeu;
 
 /**
  *Une capacité, c'est l'abstraction générique pour décrire, le pouvoir du héros, le sort d'une carte Sort, la capacité d'un servicteur, etc.
+ *Une capacite est caracterise par les informations suivante:
+ *un nom
+ *une description de ce en quoi elle consiste
+ *une disponibilite
+ * @see ICarte
+ * @author Bader Matthieu
+ * @version 1.8
  */
 public interface ICapacite{
 	/**
