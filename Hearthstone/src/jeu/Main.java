@@ -13,7 +13,7 @@ public class Main {
 	public static IJoueur joueur2;
 	private static Scanner recup = new Scanner(System.in);
 	private static int choix;
-	private static String  choixStr;
+	private static String  choixStr, choixStr2;
 
 	
 	private static void sauterLigne(int i){
@@ -27,16 +27,28 @@ public class Main {
 		System.out.println("Laquelle?(Donne un bout de son nom)");
 		recup.nextLine();
 		choixStr=recup.nextLine();
-		System.out.println(choixStr);
 		System.out.println(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 	}
 	
 	private static void UtiliserCarte() throws HearthstoneException {
+		System.out.println("Laquelle? (Donne un bout de son nom)");
+		choixStr=recup.nextLine();
+		System.out.println("Quel cible? (Donne un bout de son nom)");
+		choixStr2=recup.nextLine();
+		Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr).executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr2));
 	}
 	private static void UtiliserHeros() throws HearthstoneException {
-		System.out.println("Voulez-Vous cibler un heros ou une carte?");
-		Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getHeros());
+		do {
+			System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
+			choix=recup.nextInt();
+		}while(choix!=1&&choix!=2);
+		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getHeros());
+		else {
+			System.out.println("Laquelle? (Donne un bout de son nom)");
+			choixStr=recup.nextLine();
+			Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr));
+		}
 	}
 	
 	private static void afficherPlateau() throws HearthstoneException {
