@@ -43,7 +43,7 @@ public class Main {
 			System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
 			choix=recup.nextInt();
 		}while(choix!=1&&choix!=2);
-		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getHeros());
+		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(null);
 		else {
 			System.out.println("Laquelle? (Donne un bout de son nom)");
 			choixStr=recup.nextLine();
@@ -94,8 +94,6 @@ public class Main {
 
 		
 		//On instencie les héros ici//
-		Heros rexxar = new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 ));
-		Heros jaina = new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 ));
 
 		char caracChoix;
 		String pseudo;
@@ -114,10 +112,10 @@ public class Main {
 		}while(caracChoix != 'j' && caracChoix != 'J' && caracChoix != 'r' && caracChoix != 'R');*/
 		caracChoix='r';
 		if (caracChoix=='j'||caracChoix=='J') {
-			joueur1 = new Joueur(pseudo, jaina);
+			joueur1 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 )));
 		}
 		else {
-			joueur1 = new Joueur(pseudo, rexxar);
+			joueur1 = new Joueur(pseudo, new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 )));
 		}
 		
 		//System.out.println("Le joueur 1 est : "+ joueur1);
@@ -136,10 +134,10 @@ public class Main {
 		*/
 		caracChoix='R';
 		if (caracChoix=='j'||caracChoix=='J') {
-			joueur2 = new Joueur(pseudo, jaina);
+			joueur2 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 )));
 		}
 		else {
-			joueur2 = new Joueur(pseudo, rexxar);
+			joueur2 = new Joueur(pseudo, new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 )));
 		}
 		/////////////////////////////////////////////////////////////////
 		

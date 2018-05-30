@@ -2,7 +2,6 @@ package capacite;
 
 import jeu.HearthstoneException;
 import jeu.Heros;
-import jeu.IJoueur;
 import plateau.Plateau;
 
 /**
@@ -16,7 +15,7 @@ public class AttaqueHeros extends Attaquer {
 	}
 	
 	public void executerAction(Object cible) throws HearthstoneException {
-		Heros adversaire= (Heros)( Plateau.getInstance().getAdversaire( Plateau.getInstance().getJoueurCourant()).getHeros());
+		Heros adversaire= ( Plateau.getInstance().getAdversaire( Plateau.getInstance().getJoueurCourant()).getHeros());
         (adversaire).setPointDeVie(adversaire.getPointDeVie() - getDegat());
 	}
 
