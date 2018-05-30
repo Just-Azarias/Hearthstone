@@ -100,6 +100,10 @@ public class Joueur implements IJoueur {
 	public String getPseudo() {
 		return this.pseudo;
 	}
+	
+	public ArrayList<ICarte> getDeck(){ /////////////////////Uniquement pour tester les cartes
+		return this.deck;
+	}
 
 	@Override
 	public int getMana() {
@@ -238,7 +242,7 @@ public class Joueur implements IJoueur {
 
 	//setter
 	
-	private void setStockMana(int i) {
+	public void setStockMana(int i) {
 		this.stockMana=i;
 	}
 

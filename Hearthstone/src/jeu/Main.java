@@ -12,7 +12,7 @@ public class Main {
 	public static IJoueur joueur1;
 	public static IJoueur joueur2;
 	private static Scanner recup = new Scanner(System.in);
-	private static int choix;
+	private static int choix,i;
 	private static String  choixStr, choixStr2;
 
 	
@@ -25,7 +25,7 @@ public class Main {
 	}
 	private static void jouerCarte() throws HearthstoneException {
 		System.out.println("Laquelle?(Donne un bout de son nom)");
-		recup.nextLine();
+		//recup.nextLine();
 		choixStr=recup.nextLine();
 		System.out.println(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
@@ -49,6 +49,12 @@ public class Main {
 			choixStr=recup.nextLine();
 			Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr));
 		}
+	}
+	
+	private static void test() throws HearthstoneException {
+		for (i=0;i<Plateau.getInstance().getJoueurCourant().getDeck().size();i++)
+		Plateau.getInstance().getJoueurCourant().piocher();
+		Plateau.getInstance().getJoueurCourant().setStockMana(50);
 	}
 	
 	private static void afficherPlateau() throws HearthstoneException {
@@ -76,19 +82,19 @@ public class Main {
 		sauterLigne(4);
 		System.out.println("Que veux-tu faire? \n1. Finir le tour \n2. Jouer une carte de ta main \n3. Utiliser une carte en jeu \n4. Utiliser le pouvoir du heros \n\n-->");
 		do {
+			recup.nextInt();
 			System.out.println("entrez 1,2,3 ou 4 selon votre choix");
 			choix = recup.nextInt();
-		}while (choix != 1 &&choix!= 2 &&choix!= 4 &&choix!= 4);
+		}while (choix != 1 &&choix!= 2 &&choix!= 4 &&choix!= 4 &&choix!=5);
 		if (choix==1) passerTour();
 		else if (choix==2)jouerCarte();
 		else if (choix==3)UtiliserCarte();
 		else if (choix==4)UtiliserHeros();
+		else if (choix==5)test();
 		else throw new HearthstoneException("probleme choix du jeu");
 	}
 
 	
-
-
 	public static void main(String[] args) throws HearthstoneException {
 		
 

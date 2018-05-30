@@ -199,4 +199,10 @@ public interface IJoueur {
 	 */
 	void setCartesNeutre() throws HearthstoneException;
 
+	
+
+	ArrayList<ICarte> getDeck();//////////////////////Uniquement pour tester les cartes
+
+	void setStockMana(int i);/////////////////////////////Uniquement pour test
+
 }
