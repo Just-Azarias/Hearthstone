@@ -49,7 +49,7 @@ public class Joueur implements IJoueur {
     public void setCartesNeutre() throws HearthstoneException {
 			this.deck.add(new Serviteur("Chasse-marée murloc ", 2, this,new InvocationServiteur("Cri de guerre","Invoque un serviteur +1/+1" ,new  Serviteur("Eclaireur murloc", 0, this, 1, 1) ,1), 2,1));
 			this.deck.add(new Sort("Charge",1,this,new Charge()));
-			this.deck.add(new Sort("Attaque mentale", 2, this,new AttaqueHeros("Attaque mentale", "Inflige  points de degats au heros ennemis", 5) ));
+			this.deck.add(new Sort("Attaque mentale", 2, this,new AttaqueHeros("Attaque mentale", "Inflige 5 points de degats au heros ennemis", 5) ));
 			this.deck.add(new Serviteur("Champion de Hurlevent", 7, this,new EffetPermanent("Bonus du hurlevent", "Donne un bonus aux autres serviteurs allies de +1/+1", 1, 1) , 6, 6));
 			this.deck.add(new Serviteur("Chef de raid", 3, this,new EffetPermanent("Bonus du chef de raid","Effet permanent sur les autres serviteurs alliés de +1/0", 1, 0),2,2));
 			this.deck.add(new Serviteur("Garde de Baie-du-butin", 5, this,new Provocation(), 5, 4));
@@ -147,6 +147,7 @@ public class Joueur implements IJoueur {
 		if (this.getMana()<MAX_MANA) this.mana++;
 		this.stockMana=this.mana;
 		piocher();
+		this.getHeros().setPouvoir(true);
 		if (this.cartePlateau!=null) {
 			for(ICarte n:this.cartePlateau) {
 				if (n instanceof Serviteur) {

@@ -2,6 +2,7 @@ package capacite;
 
 import carte.Serviteur;
 import jeu.HearthstoneException;
+import jeu.ICarte;
 import jeu.IJoueur;
 import plateau.Plateau;
 
@@ -15,8 +16,8 @@ public class InvocationChien extends InvocationServiteur {
 		new Serviteur("Chien errant", 1, joueur, new Charge(), 1, 1), 0);
 	}
 	
-	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
-		this.setNb(Plateau.getInstance().getAdversaire((IJoueur) cible).getJeu().size());
-		super.executerAction(cible);
+	public void executerEffetMiseEnJeu(Object carte) throws HearthstoneException {
+		this.setNb( Plateau.getInstance().getAdversaire(((ICarte)carte).getProprietaire()).getJeu().size());
+		super.executerAction(carte);
 	}
 }

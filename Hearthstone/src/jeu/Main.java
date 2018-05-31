@@ -13,6 +13,7 @@ public class Main {
 	private static Scanner recup = new Scanner(System.in);
 	private static int choix,i;
 	private static String  choixStr, choixStr2;
+	private static char caracChoix;
 
 	private static void sauterLigne(int i){
 		int j;
@@ -29,10 +30,10 @@ public class Main {
 		if (carte.getCapacite() instanceof AttaqueCible) {
 			do{
 				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
-				choix=recup.nextInt();
-				recup.nextLine();
-			}while(choix!=1&&choix!=2);
-			if (choix==2) {
+				choixStr=recup.nextLine();
+				caracChoix = choixStr.charAt(0);
+			}while(caracChoix!='1'&&caracChoix!='2');
+			if (caracChoix=='2') {
 				System.out.println("Quel cible? (Donne un bout de son nom)");
 				choixStr2=recup.nextLine();
 				ICarte cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getCarteEnJeu(choixStr2);
@@ -45,7 +46,11 @@ public class Main {
 			}
 		}
 		else Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
-		if (carte.getCapacite() instanceof AttaqueHeros) Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
+		if (carte.getCapacite() instanceof AttaqueHeros) {
+			Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
+			IJoueur adversaire = Plateau.getInstance().getAdversaire(carte.getProprietaire());
+			if (adversaire.getHeros().getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
+		}
 	}
 	
 	private static void UtiliserCarte() throws HearthstoneException {
@@ -55,10 +60,10 @@ public class Main {
 		if (carte!=null) {
 			do{
 				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
-				choix=recup.nextInt();
-				recup.nextLine();
-			}while(choix!=1&&choix!=2);
-			if (choix==2) {
+				choixStr=recup.nextLine();
+				caracChoix = choixStr.charAt(0);
+			}while(caracChoix!='1'&&caracChoix!='2');
+			if (caracChoix=='2') {
 				System.out.println("Quel cible? (Donne un bout de son nom)");
 				choixStr2=recup.nextLine();
 				ICarte cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getCarteEnJeu(choixStr2);
@@ -81,10 +86,10 @@ public class Main {
 		else {
 			do {
 				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
-				choix=recup.nextInt();
-				recup.nextLine();
-			}while(choix!=1&&choix!=2);
-			if (choix==1) {
+				choixStr=recup.nextLine();
+				caracChoix = choixStr.charAt(0);
+			}while(caracChoix!='1'&&caracChoix!='2');
+			if (caracChoix=='1') {
 				Plateau.getInstance().getJoueurCourant().utiliserPouvoir(adversaire.getHeros());
 				if (adversaire.getHeros().getPointDeVie()<=0) Plateau.getInstance().gagnePartie(Plateau.getInstance().getJoueurCourant());
 			}
@@ -129,14 +134,14 @@ public class Main {
 		System.out.println("Que veux-tu faire? \n1. Finir le tour \n2. Jouer une carte de ta main \n3. Utiliser une carte en jeu \n4. Utiliser le pouvoir du heros \n\n-->");
 		do {
 			System.out.println("entrez 1,2,3 ou 4 selon votre choix");
-			choix = recup.nextInt();
-			recup.nextLine();
-		}while (choix != 1 &&choix!= 2 &&choix!= 3 &&choix!= 4 &&choix!=5);
-		if (choix==1) passerTour();
-		else if (choix==2)jouerCarte();
-		else if (choix==3)UtiliserCarte();
-		else if (choix==4)UtiliserHeros();
-		else if (choix==5)test();
+			choixStr = recup.nextLine();
+			caracChoix = choixStr.charAt(0);
+		}while (caracChoix != '1' &&caracChoix!= '2' &&caracChoix!= '3' &&caracChoix!= '4' &&caracChoix!='5');
+		if (caracChoix=='1') passerTour();
+		else if (caracChoix=='2')jouerCarte();
+		else if (caracChoix=='3')UtiliserCarte();
+		else if (caracChoix=='4')UtiliserHeros();
+		else if (caracChoix=='5')test();
 		else throw new HearthstoneException("probleme choix du jeu");
 	}
 

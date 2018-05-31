@@ -1,9 +1,10 @@
 package capacite;
 
 import jeu.HearthstoneException;
+import jeu.ICarte;
 import jeu.IJoueur;
 
-/**Cette classe représente la pioche d'une ou plusieurs cartes
+/**Cette classe represente la pioche d'une ou plusieurs cartes
 *
 *@author Badr Matthieu
 */
@@ -23,7 +24,7 @@ public class Pioche extends Capacite {
 		if(cible == null)
 			throw new HearthstoneException("Cible de pioche incorrecte");
 		for(int k=0;k<this.nb;k++) {
-			((IJoueur) cible).piocher();
+			((ICarte) cible).getProprietaire().piocher();
 		}
 	}
 	

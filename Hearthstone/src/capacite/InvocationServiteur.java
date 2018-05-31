@@ -17,7 +17,7 @@ public class InvocationServiteur extends Capacite{
 		this.setNb(nb);
 	}
 	
-	public void executerAction(Object cible) throws HearthstoneException {
+	public void executerAction(Object carte) throws HearthstoneException {
 		//Plateau plateau=null;
 		IJoueur courant=Plateau.getInstance().getJoueurCourant();
 		int nombre=(courant.getJeu().size()+getNb() > IJoueur.MAX_BOARD)? IJoueur.MAX_BOARD-courant.getJeu().size() : getNb();
