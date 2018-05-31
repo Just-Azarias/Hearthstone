@@ -21,8 +21,10 @@ public class AttaqueCible extends Attaquer {
 		if(cible instanceof Heros)
 			((Heros) cible).setPointDeVie(((Heros) cible).getPointDeVie()-getDegat());
 		
-		else
+		else {
 			((Serviteur) cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-getDegat());
+			if(((Serviteur) cible).disparait()) ((Serviteur)cible).getProprietaire().perdreCarte((ICarte) cible);
+		}
 	}
 	@Override
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {

@@ -30,4 +30,6 @@ public class AttaqueHeros extends Attaquer {
 
 	@Override
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {}
+
+
 }

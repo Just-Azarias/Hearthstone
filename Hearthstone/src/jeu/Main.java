@@ -31,34 +31,38 @@ public class Main {
 	
 	private static void UtiliserCarte() throws HearthstoneException {
 		System.out.println("Laquelle? (Donne un bout de son nom)");
-		//viderBuffer();
 		choixStr=recup.nextLine();
 		System.out.println("Quel cible? (Donne un bout de son nom)");
-		//viderBuffer();
 		choixStr2=recup.nextLine();
 		Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr).executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr2));
 	}
+	
 	private static void UtiliserHeros() throws HearthstoneException {
-		do {
-			System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
-			//viderBuffer();
-			choix=recup.nextInt();
-			recup.nextLine();
-		}while(choix!=1&&choix!=2);
 		IJoueur adversaire = Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant());
-		if (choix==1) Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(adversaire.getHeros());
+		if (Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().getNom().contains("tir assure")){
+			Plateau.getInstance().getJoueurCourant().utiliserPouvoir(adversaire.getHeros());
+		}
 		else {
-			System.out.println("Laquelle? (Donne un bout de son nom)");
-			//viderBuffer();
-			choixStr=recup.nextLine();
-			Plateau.getInstance().getJoueurCourant().getHeros().getCapacite().executerAction(adversaire.getCarteEnJeu(choixStr));
+			do {
+				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
+				choix=recup.nextInt();
+				recup.nextLine();
+			}while(choix!=1&&choix!=2);
+			if (choix==1) 
+				Plateau.getInstance().getJoueurCourant().utiliserPouvoir(adversaire.getHeros());
+			else {
+				System.out.println("Laquelle? (Donne un bout de son nom)");
+				choixStr=recup.nextLine();
+				Plateau.getInstance().getJoueurCourant().utiliserPouvoir(adversaire.getCarteEnJeu(choixStr));
+			}
 		}
 	}
 	
 	private static void test() throws HearthstoneException {
-		for (i=0;i<Plateau.getInstance().getJoueurCourant().getDeck().size();i++)
-		Plateau.getInstance().getJoueurCourant().piocher();
+		for (i=0;i<15;i++) Plateau.getInstance().getJoueurCourant().piocher();
 		Plateau.getInstance().getJoueurCourant().setStockMana(50);
+		Plateau.getInstance().getJoueurCourant().setMana(50);
+
 	}
 	
 	private static void afficherPlateau() throws HearthstoneException {
@@ -120,9 +124,9 @@ public class Main {
 			choixStr = recup.nextLine();
 			caracChoix = choixStr.charAt(0);
 		}while(caracChoix != 'j' && caracChoix != 'J' && caracChoix != 'r' && caracChoix != 'R');*/
-		caracChoix='j';
+		caracChoix='r';
 		if (caracChoix=='j'||caracChoix=='J') {
-			joueur1 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 )));
+			joueur1 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("Boule de feu", "inflige 1 point de degats a la cible choisie", 1 )));
 		}
 		else {
 			joueur1 = new Joueur(pseudo, new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 )));
@@ -144,7 +148,7 @@ public class Main {
 		*/
 		caracChoix='j';
 		if (caracChoix=='j'||caracChoix=='J') {
-			joueur2 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("tir assure", "inflige 1 point de degats a la cible choisie", 1 )));
+			joueur2 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("Boule de feu", "inflige 1 point de degats a la cible choisie", 1 )));
 		}
 		else {
 			joueur2 = new Joueur(pseudo, new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 )));

@@ -215,4 +215,6 @@ public interface IJoueur {
 
 	void setStockMana(int i);/////////////////////////////Uniquement pour test
 
+	void setMana(int i);///////////////uniquement pr les tests
+
 }

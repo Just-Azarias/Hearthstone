@@ -54,7 +54,7 @@ public class Joueur implements IJoueur {
 			this.deck.add(new Serviteur("Chef de raid", 3, this,new EffetPermanent("Bonus du chef de raid","Effet permanent sur les autres serviteurs alliés de +1/0", 1, 0),2,2));
 			this.deck.add(new Serviteur("Garde de Baie-du-butin", 5, this,new Provocation(), 5, 4));
 			this.deck.add(new Serviteur("La missiliere temeraire", 6, this,new Charge(), 5, 2));
-			this.deck.add(new Serviteur("L'ogre- magi", 4, this,new Provocation(), 4, 4));
+			this.deck.add(new Serviteur("L'ogre magie", 4, this,new Provocation(), 4, 4));
 			this.deck.add(new Serviteur("Archimage", 6, this,new Provocation(), 4, 7));
 			this.deck.add(new Serviteur("Gnome lepreux", 1, this,new AttaqueCible("Attaque de lepreux","Inflige 2 de degat", 2), 1, 1));
 			this.deck.add(new Serviteur("Golem de moissons", 3, this,new Golemisation(this), 2, 3));
@@ -167,8 +167,10 @@ public class Joueur implements IJoueur {
 
 	@Override
 	public void piocher() throws HearthstoneException {
-		this.main.add(this.deck.get(0));
-		this.deck.remove(0);
+		if (!this.getDeck().isEmpty()) {
+			this.main.add(this.deck.get(0));
+			this.deck.remove(0);
+		}
 	}
 
 	@Override
@@ -224,14 +226,11 @@ public class Joueur implements IJoueur {
 		}
 	}
 
-	@Override
-	public void utiliserPouvoir(Object cible) throws HearthstoneException {
+	public void utiliserPouvoir(Object o) throws HearthstoneException {
 		if (this.heros.getPouvoir()) {
-			heros.getCapacite().executerAction(cible);
+			heros.getCapacite().executerAction(o);
 			heros.setPouvoir(false);
 		}
-		else
-			throw new HearthstoneException("le heros ne peut pas utiliser son pouvoir 2 fois");
 	}
 
 	@Override
@@ -242,12 +241,12 @@ public class Joueur implements IJoueur {
 
 	//setter
 	
-	public void setStockMana(int i) {
+	public void setStockMana(int i) { ////////normalement en private (test)
 		this.stockMana=i;
 	}
 
-
-	private void setMana(int i) {
+ 
+	public void setMana(int i) {        //////sont normalement en private
 		this.mana=i;
 	}
 
