@@ -34,6 +34,35 @@ public interface IJoueur {
 	public final static int MAX_BOARD=7;
 	
 	/**
+	 * Ajouter à la liste les cartes neutre (communes à tout les decks)
+	 * @throws HearthstoneException
+	 */
+	void setCartesNeutre() throws HearthstoneException;
+	
+	/**
+	 * Ajouter les cartes spécifiques à Jaina
+	 * @throws HearthstoneException Dans le cas où l'initialisation des sorts est mal gérée
+	 */
+	void setCartesJaina() throws HearthstoneException;
+	
+	/**
+	 * Ajouter les cartes spécifiques à Rexxar
+	 * @throws HearthstoneException Dans le cas où l'initialisation des sorts est mal gérée
+	 */
+	void setCartesRexxar() throws HearthstoneException;
+	
+	/**
+	 * Permet d'avoir le deck du heros (simplement pour des tests)
+	 * @return Le deck du Joueur
+	 */
+	ArrayList<ICarte> getDeck();
+	
+	/**
+	 * Permet de mélanger le deck..
+	 */
+	void melanger();
+	
+	/**
 	 * @return C'est le héros choisi par le joueur
 	 */
 	Heros getHeros();
@@ -199,22 +228,14 @@ public interface IJoueur {
 	 * @return
 	 */
 	boolean isProvocation();
-
 	
 	/**
-	 * crée les cartes neutres que vont contenir tout les decks
-	 * @param liste
-	 * 				La liste a laquel ajouter les cartes
-	 * @throws HearthstoneException 
+	 * Modifier le stock de Mana courant
+	 * @param i
+	 * 		Le nouveau stock de mana
 	 */
-	void setCartesNeutre() throws HearthstoneException;
+	void setStockMana(int i);
 
-	
-
-	ArrayList<ICarte> getDeck();//////////////////////Uniquement pour tester les cartes
-
-	void setStockMana(int i);/////////////////////////////Uniquement pour test
-
-	void setMana(int i);///////////////uniquement pr les tests
+	void setMana(int i);
 
 }

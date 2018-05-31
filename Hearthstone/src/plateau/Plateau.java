@@ -14,6 +14,10 @@ public class Plateau implements IPlateau {
 	private IJoueur joueurCourant = null;
 	private boolean demarree = false;
 	
+	/**
+	 * Initialise l'unique instance de Plateau si non fait, et permet de la récupérer partout
+	 * @return l'unique instance de Plateau
+	 */
 	public static IPlateau getInstance() {
 		if(uniquePlateau==null)
 		uniquePlateau = new Plateau();

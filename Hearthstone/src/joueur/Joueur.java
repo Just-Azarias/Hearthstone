@@ -28,8 +28,8 @@ public class Joueur implements IJoueur {
 		setPseudo(pseudo);
 		setHeros(heros);
 		this.setCartesNeutre();
-		if (heros.getNom().contains("Jaina")) this.setCartesJaina(this.deck);
-		else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar(this.deck);
+		if (heros.getNom().contains("Jaina")) this.setCartesJaina();
+		else if (heros.getNom().contains("Rexxar")) this.setCartesRexxar();
 		else new HearthstoneException("héros non initialiser");
 		melanger();
 	}
@@ -60,21 +60,21 @@ public class Joueur implements IJoueur {
 			this.deck.add(new Serviteur("Golem de moissons", 3, this,new Golemisation(this), 2, 3));
 	}
 	
-	public void setCartesJaina(ArrayList<ICarte> deck2) throws HearthstoneException {
-		deck2.add(new Sort("Choc de flamme", 7,this,new AttaqueTotale("Attaque massive","Inflige 4 points de degats a tous les serviteurs adverses", 4)));
-		deck2.add(new Sort("Eclair de givre",2,this,new AttaqueCible("Attaque du givre","Inflige 3 points de degats  au personnage cible",3)));
-		deck2.add(new Sort("Intelligence des arcanes", 2,this,new Pioche(2))); 
-		deck2.add(new Sort("Image mirroir",1,this,new ImageMiroir(this)));
-		deck2.add(new Sort("Explosion pyrotechnique", 10, this, new AttaqueCible("Explosion pyrotechnique","Inflige 10 points de degats  au personnage cible",10))); 
+	public void setCartesJaina() throws HearthstoneException {
+		this.deck.add(new Sort("Choc de flamme", 7,this,new AttaqueTotale("Attaque massive","Inflige 4 points de degats a tous les serviteurs adverses", 4)));
+		this.deck.add(new Sort("Eclair de givre",2,this,new AttaqueCible("Attaque du givre","Inflige 3 points de degats  au personnage cible",3)));
+		this.deck.add(new Sort("Intelligence des arcanes", 2,this,new Pioche(2))); 
+		this.deck.add(new Sort("Image mirroir",1,this,new ImageMiroir(this)));
+		this.deck.add(new Sort("Explosion pyrotechnique", 10, this, new AttaqueCible("Explosion pyrotechnique","Inflige 10 points de degats  au personnage cible",10))); 
 	}
 	
-	public void setCartesRexxar(ArrayList<ICarte> deck2) throws HearthstoneException {
+	public void setCartesRexxar() throws HearthstoneException {
 		
-		deck2.add(new Serviteur("Busard affame", 5,this,new Pioche(1), 3, 2)); 
-		deck2.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
-		deck2.add(new Sort("Tir des arcanes", 1,this,new AttaqueCible("Tir des aecanes","Inflige 2 points de degats  au personnage cible",2)));
-		deck2.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this)));
-		deck2.add(new Sort("Ordre de tuer", 3,this,new AttaqueCible("Ordre de tuer","Inflige 3 points de degats  au personnage cible",3)));
+		this.deck.add(new Serviteur("Busard affame", 5,this,new Pioche(1), 3, 2)); 
+		this.deck.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
+		this.deck.add(new Sort("Tir des arcanes", 1,this,new AttaqueCible("Tir des aecanes","Inflige 2 points de degats  au personnage cible",2)));
+		this.deck.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this)));
+		this.deck.add(new Sort("Ordre de tuer", 3,this,new AttaqueCible("Ordre de tuer","Inflige 3 points de degats  au personnage cible",3)));
 	}
 	
 	public boolean equals(Object joueur) {
