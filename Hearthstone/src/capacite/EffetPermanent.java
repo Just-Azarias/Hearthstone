@@ -35,17 +35,17 @@ public class EffetPermanent extends Capacite {
 		return bonusPV;
 	}
 	
-	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
-		for(ICarte carte : ((IJoueur) cible).getJeu()) {
-			((Serviteur) carte).setPointAttaque(((Serviteur) carte).getPointAttaque() + bonusAtq);
-			((Serviteur) carte).setPointDeVie(((Serviteur) carte).getPointDeVie() + bonusPV);
+	public void executerEffetMiseEnJeu(Object carte) throws HearthstoneException {
+		for(ICarte c : ((ICarte)carte).getProprietaire().getJeu()) {
+			((Serviteur) c).setPointAttaque(((Serviteur) c).getPointAttaque() + bonusAtq);
+			((Serviteur) c).setPointDeVie(((Serviteur) c).getPointDeVie() + bonusPV);
 		}
 	}
 	
-	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		for(ICarte carte : ((IJoueur) cible).getJeu()) {
-			((Serviteur) carte).setPointAttaque(((Serviteur) carte).getPointAttaque() - bonusAtq);
-			((Serviteur) carte).setPointDeVie(((Serviteur) carte).getPointDeVie() - bonusPV);
+	public void executerEffetDisparition(Object carte) throws HearthstoneException {
+		for(ICarte c : ((ICarte)carte).getProprietaire().getJeu()) {
+			((Serviteur) c).setPointAttaque(((Serviteur) c).getPointAttaque() - bonusAtq);
+			((Serviteur) c).setPointDeVie(((Serviteur) c).getPointDeVie() - bonusPV);
 		}
 	}
 	

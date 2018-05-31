@@ -150,7 +150,7 @@ public class Joueur implements IJoueur {
 		if (this.cartePlateau!=null) {
 			for(ICarte n:this.cartePlateau) {
 				if (n instanceof Serviteur) {
-					if (((Serviteur) n).getPeuJouer()>0) ((Serviteur) n).reduirePeuJouer();
+					if (((Serviteur) n).getPeuJouer()<=0) ((Serviteur) n).AugmenterPeutJouer();
 				}
 			}
 		}
@@ -161,7 +161,6 @@ public class Joueur implements IJoueur {
 		if (Plateau.getInstance().getJoueurCourant().equals(this)) {
 			for (ICarte carte : this.getJeu()) carte.executerEffetFinTour(Plateau.getInstance().getAdversaire(this));
 			Plateau.getInstance().finTour(this);
-			Plateau.getInstance().getAdversaire(this).prendreTour();
 		}
 	}
 
@@ -176,7 +175,7 @@ public class Joueur implements IJoueur {
 	@Override
 	public void jouerCarte(ICarte carte) throws HearthstoneException {
 		if (this.main.contains(carte)){
-			if (carte.getCout()>this.getStockMana()) new HearthstoneException("Pas assez de Mana");
+			if (carte.getCout()>this.getStockMana()) throw new HearthstoneException("Pas assez de Mana");
 			this.getMain().remove(carte);
 			if (carte instanceof Serviteur) {
 				if (this.getJeu().size()>=MAX_BOARD) throw new HearthstoneException("Plus de places sur le plateau");
@@ -206,7 +205,7 @@ public class Joueur implements IJoueur {
 	
 	@Override
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException {
-		if ( !((Serviteur) carte).peutAttaquer()) throw new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
+		//if ( !((Serviteur) carte).peutAttaquer()) throw new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
 		if (cible instanceof Heros) {
 			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) throw new HearthstoneException("ne peut pas attaquer de hero si l'adversaire a une carte provocation");
 			else {
@@ -217,12 +216,24 @@ public class Joueur implements IJoueur {
 		if (cible instanceof Serviteur) {
 			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) {
 				if (!(((Serviteur)cible).getCapacite() instanceof Provocation)) throw new HearthstoneException("ne peut attaquer ccette carte car une carte provocation est mise en jeu");
-				else {
+				else  if (((Serviteur)carte).peutAttaquer()){
 					((Serviteur)cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-((Serviteur )carte).getPointAttaque());
 					((Serviteur)carte).setPointDeVie(((Serviteur) carte).getPointDeVie()-((Serviteur )cible).getPointAttaque());
 					((Serviteur)carte).reduirePeuJouer();
 				}
 			}
+			else {
+				((Serviteur)cible).setPointDeVie(((Serviteur) cible).getPointDeVie()-((Serviteur )carte).getPointAttaque());
+				((Serviteur)carte).setPointDeVie(((Serviteur) carte).getPointDeVie()-((Serviteur )cible).getPointAttaque());
+				((Serviteur)carte).reduirePeuJouer();
+			}
+			ICarte j = null, k = null;                 //oblige de faire comme ca pour ne pas modifier la liste de carte pensant qu'on la parcours
+			for( ICarte n:this.getJeu()) if(n.disparait()) j=n;
+			for( ICarte n:Plateau.getInstance().getAdversaire(this).getJeu()) if(n.disparait())k=n;
+			if (j!=null)
+			this.perdreCarte(j);
+			if (k!=null)
+			Plateau.getInstance().getAdversaire(this).perdreCarte(k);
 		}
 	}
 
@@ -236,7 +247,7 @@ public class Joueur implements IJoueur {
 	@Override
 	public void perdreCarte(ICarte carte) throws HearthstoneException {
 		this.cartePlateau.remove(carte);
-		carte.executerEffetDisparition(Plateau.getInstance().getAdversaire(this));
+		carte.executerEffetDisparition(carte.getProprietaire());
 	}
 
 	//setter

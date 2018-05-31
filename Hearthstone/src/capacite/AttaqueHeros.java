@@ -16,7 +16,7 @@ public class AttaqueHeros extends Attaquer {
 	
 	public void executerAction(Object cible) throws HearthstoneException {
 		Heros adversaire= ( Plateau.getInstance().getAdversaire( Plateau.getInstance().getJoueurCourant()).getHeros());
-        (adversaire).setPointDeVie(adversaire.getPointDeVie() - getDegat());
+        (adversaire).setPointDeVie(adversaire.getPointDeVie() - this.getDegat());
 	}
 
 	@Override

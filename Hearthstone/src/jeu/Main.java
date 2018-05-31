@@ -23,7 +23,6 @@ public class Main {
 	}
 	private static void jouerCarte() throws HearthstoneException {
 		System.out.println("Laquelle?(Donne un bout de son nom)");
-		//viderBuffer();
 		choixStr=recup.nextLine();
 		System.out.println(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
 		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
@@ -32,9 +31,25 @@ public class Main {
 	private static void UtiliserCarte() throws HearthstoneException {
 		System.out.println("Laquelle? (Donne un bout de son nom)");
 		choixStr=recup.nextLine();
-		System.out.println("Quel cible? (Donne un bout de son nom)");
-		choixStr2=recup.nextLine();
-		Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr).executerAction(Plateau.getInstance().getAdversaire(Plateau.getInstance().getJoueurCourant()).getCarteEnJeu(choixStr2));
+		ICarte carte= Plateau.getInstance().getJoueurCourant().getCarteEnJeu(choixStr);
+		if (carte!=null) {
+			do{
+				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
+				choix=recup.nextInt();
+				recup.nextLine();
+			}while(choix!=1&&choix!=2);
+			if (choix==2) {
+				System.out.println("Quel cible? (Donne un bout de son nom)");
+				choixStr2=recup.nextLine();
+				ICarte cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getCarteEnJeu(choixStr2);
+				Plateau.getInstance().getJoueurCourant().utiliserCarte(carte,cible);
+			}
+			else {
+				Heros cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getHeros();
+				Plateau.getInstance().getJoueurCourant().utiliserCarte(carte,cible);
+			}
+		}
+		else System.out.println("Cette carte n'est pas sur le plateau");
 	}
 	
 	private static void UtiliserHeros() throws HearthstoneException {
@@ -93,7 +108,7 @@ public class Main {
 			System.out.println("entrez 1,2,3 ou 4 selon votre choix");
 			choix = recup.nextInt();
 			recup.nextLine();
-		}while (choix != 1 &&choix!= 2 &&choix!= 4 &&choix!= 4 &&choix!=5);
+		}while (choix != 1 &&choix!= 2 &&choix!= 3 &&choix!= 4 &&choix!=5);
 		if (choix==1) passerTour();
 		else if (choix==2)jouerCarte();
 		else if (choix==3)UtiliserCarte();

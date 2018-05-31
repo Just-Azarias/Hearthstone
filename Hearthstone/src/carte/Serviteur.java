@@ -3,7 +3,6 @@ package carte;
 import capacite.Charge;
 import capacite.Provocation;
 import jeu.*;
-import joueur.Joueur;
 import plateau.Plateau;
 
 /**Cette classe représente un Serviteur
@@ -55,20 +54,23 @@ public class Serviteur extends Carte {
 
 	@Override
 	public void executerEffetFinTour(Object cible) throws HearthstoneException {
+		if (this.getCapacite()!=null)
 		this.getCapacite().executerEffetFinTour();
 	}
 
 	@Override
-	public void executerEffetDebutMiseEnJeu(Object cible) throws HearthstoneException {
+	public void executerEffetDebutMiseEnJeu(Object carte) throws HearthstoneException {
 		if(this.getCapacite() instanceof Charge) this.peuJouer=1;
-		this.getCapacite().executerEffetMiseEnJeu(cible);
+		this.getCapacite().executerEffetMiseEnJeu(carte);
 		
 	}
 
 	@Override
 	public void executerEffetDisparition(Object cible) throws HearthstoneException {
-		this.getCapacite().executerEffetDisparition(cible);
+		if (this.getCapacite()!=null) 
+			this.getCapacite().executerEffetDisparition(cible);
 	}
+		
 
 	@Override
 	public void executerAction(Object cible) throws HearthstoneException {
@@ -128,5 +130,9 @@ public class Serviteur extends Carte {
 		if (this.getCapacite()!=null) res+= "-->"+this.getCapacite();
 		res+="]";
 		return res;
+	}
+
+	public void AugmenterPeutJouer() {
+		this.peuJouer+=1;
 	}
 }

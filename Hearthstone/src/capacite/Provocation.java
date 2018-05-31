@@ -13,7 +13,8 @@ public class Provocation extends Capacite {
 
     public final void executerEffetDebutTour() {}
 
-    public final void executerEffetDisparition(Object cible) {}
+    public final void executerEffetDisparition(Object cible) {
+    }
 	
 	public final void executerEffetMiseEnJeu(Object cible) {}
 
