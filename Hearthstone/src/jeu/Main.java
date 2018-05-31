@@ -148,10 +148,10 @@ public class Main {
 		*/
 		caracChoix='j';
 		if (caracChoix=='j'||caracChoix=='J') {
-			joueur2 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("Boule de feu", "inflige 1 point de degats a la cible choisie", 1 )));
+			joueur2 = new Joueur(pseudo, new Heros("Jaina",new AttaqueCible("Boule de feu", "inflige 1 point de degats a la cible choisie", 1)));
 		}
 		else {
-			joueur2 = new Joueur(pseudo, new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2 )));
+			joueur2 = new Joueur(pseudo, new Heros("Rexxar", new AttaqueHeros("tir assure", "inflige 2 points de degats au heros adverse", 2)));
 		}
 		/////////////////////////////////////////////////////////////////
 		
