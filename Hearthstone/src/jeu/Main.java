@@ -41,9 +41,11 @@ public class Main {
 			else {
 				Heros cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getHeros();
 				Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
+				if (cible.getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
 			}
 		}
 		else Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
+		if (carte.getCapacite() instanceof AttaqueHeros) Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
 	}
 	
 	private static void UtiliserCarte() throws HearthstoneException {
@@ -65,6 +67,7 @@ public class Main {
 			else {
 				Heros cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getHeros();
 				Plateau.getInstance().getJoueurCourant().utiliserCarte(carte,cible);
+				if (cible.getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
 			}
 		}
 		else System.out.println("Cette carte n'est pas sur le plateau");
@@ -81,8 +84,10 @@ public class Main {
 				choix=recup.nextInt();
 				recup.nextLine();
 			}while(choix!=1&&choix!=2);
-			if (choix==1) 
+			if (choix==1) {
 				Plateau.getInstance().getJoueurCourant().utiliserPouvoir(adversaire.getHeros());
+				if (adversaire.getHeros().getPointDeVie()<=0) Plateau.getInstance().gagnePartie(Plateau.getInstance().getJoueurCourant());
+			}
 			else {
 				System.out.println("Laquelle? (Donne un bout de son nom)");
 				choixStr=recup.nextLine();
@@ -196,7 +201,7 @@ public class Main {
 
 		////////////////////Début de la partie////////////////////////////////////////
 		Plateau.getInstance().demarrerPartie();
-		while (/*Plateau.getInstance().getJoueurCourant().getHeros().getPointDeVie()>0*/i>0) {
+		while (Plateau.getInstance().estDemarree()) {
 			sauterLigne(8);
 			afficherPlateau();
 			jouer();
