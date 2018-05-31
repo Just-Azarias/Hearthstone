@@ -72,7 +72,7 @@ public class Joueur implements IJoueur {
 		
 		this.deck.add(new Serviteur("Busard affame", 5,this,new Pioche(1), 3, 2)); 
 		this.deck.add(new Sort("Marque du chasseur", 1,this,new MarqueChasseur()));
-		this.deck.add(new Sort("Tir des arcanes", 1,this,new AttaqueCible("Tir des aecanes","Inflige 2 points de degats  au personnage cible",2)));
+		this.deck.add(new Sort("Tir des arcanes", 1,this,new AttaqueCible("Tir des arcanes","Inflige 2 points de degats  au personnage cible",2)));
 		this.deck.add(new Sort("Lachez les chiens", 3,this, new InvocationChien(this)));
 		this.deck.add(new Sort("Ordre de tuer", 3,this,new AttaqueCible("Ordre de tuer","Inflige 3 points de degats  au personnage cible",3)));
 	}
@@ -208,11 +208,18 @@ public class Joueur implements IJoueur {
 			this.setStockMana(this.getStockMana()-carte.getCout());
 		}
 		else throw new HearthstoneException("Carte non trouvé dans la main du joueur");
+		ICarte k;
+		do {
+			k = null;
+			for( ICarte n:Plateau.getInstance().getAdversaire(this).getJeu()) if(n.disparait())k=n;
+			if (k!=null)
+				Plateau.getInstance().getAdversaire(this).perdreCarte(k);
+		}while(k!=null);
 	}
 	
 	@Override
 	public void utiliserCarte(ICarte carte, Object cible) throws HearthstoneException {
-		//if ( !((Serviteur) carte).peutAttaquer()) throw new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
+		if ( !((Serviteur) carte).peutAttaquer()) throw new HearthstoneException("cette carte ne peut pas etre utiliser sur ce tour");
 		if (cible instanceof Heros) {
 			if (((Joueur)Plateau.getInstance().getAdversaire(this)).isProvocation()) throw new HearthstoneException("ne peut pas attaquer de hero si l'adversaire a une carte provocation");
 			else {

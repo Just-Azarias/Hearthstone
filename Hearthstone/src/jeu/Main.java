@@ -24,8 +24,26 @@ public class Main {
 	private static void jouerCarte() throws HearthstoneException {
 		System.out.println("Laquelle?(Donne un bout de son nom)");
 		choixStr=recup.nextLine();
-		System.out.println(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
-		Plateau.getInstance().getJoueurCourant().jouerCarte(Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr));
+		ICarte carte= Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr);
+		System.out.println(carte);
+		if (carte.getCapacite() instanceof AttaqueCible) {
+			do{
+				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
+				choix=recup.nextInt();
+				recup.nextLine();
+			}while(choix!=1&&choix!=2);
+			if (choix==2) {
+				System.out.println("Quel cible? (Donne un bout de son nom)");
+				choixStr2=recup.nextLine();
+				ICarte cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getCarteEnJeu(choixStr2);
+				Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
+			}
+			else {
+				Heros cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getHeros();
+				Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
+			}
+		}
+		else Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
 	}
 	
 	private static void UtiliserCarte() throws HearthstoneException {
