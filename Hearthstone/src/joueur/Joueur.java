@@ -185,6 +185,13 @@ public class Joueur implements IJoueur {
 			this.setStockMana(this.getStockMana()-carte.getCout());
 		}
 		else new HearthstoneException("Carte non trouvé dans la main du joueur");
+		ICarte k;
+		do {
+			k = null;
+			for( ICarte n:Plateau.getInstance().getAdversaire(this).getJeu()) if(n.disparait())k=n;
+			if (k!=null)
+				Plateau.getInstance().getAdversaire(this).perdreCarte(k);
+		}while(k!=null);
 	}
 
 

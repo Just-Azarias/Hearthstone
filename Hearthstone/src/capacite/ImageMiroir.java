@@ -11,7 +11,7 @@ import jeu.IJoueur;
 public class ImageMiroir extends InvocationServiteur {
 	public ImageMiroir(IJoueur joueur) throws HearthstoneException {
 		super("Image Miroir", "Invoque 2 serviteurs 0/2 avec la capacite Provocation", 
-				new Serviteur("Image Remanente", 1, joueur, new Provocation(), 0, 2), 2);
+				new Serviteur("Image Remanente", 0, joueur, new Provocation(), 0, 2), 2);
 	}
 	
 	public void executerEffetMiseEnJeu(Object cible) throws HearthstoneException {
