@@ -7,6 +7,12 @@ import jeu.HearthstoneException;
 import jeu.IJoueur;
 import jeu.IPlateau;
 
+/**Classe representant le plateau
+ * 
+ * @author Badr Matthieu
+ * 
+ *
+ */
 
 public class Plateau implements IPlateau {
 	private ArrayList<IJoueur> joueurs = new ArrayList<IJoueur>();

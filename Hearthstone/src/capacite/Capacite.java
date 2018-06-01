@@ -2,7 +2,7 @@ package capacite;
 
 import jeu.*;
 
-/**
+/**Classe de la capacite
 *
 *@author Badr Matthieu
 */
