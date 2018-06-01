@@ -97,10 +97,18 @@ public class Serviteur extends Carte {
 		}
 	}
 	
+	/**
+	 * reroutne l'attaque du serviteur
+	 * @return l'attaque du serviteur
+	 */
 	public int getPointAttaque() {
 		return this.pointAttaque;
 	}
 
+	/**
+	 * retourne si le serviteur peut attaquer
+	 * @return true si le serviteur peut attaquer
+	 */
 	public int getPeuJouer(){
 		return this.peuJouer;
 	}
@@ -110,16 +118,26 @@ public class Serviteur extends Carte {
 		return this.getPointDeVie()<=0;
 	}
 
+	/**
+	 * Reduit le nombre d'attaque du serviteur de 1
+	 */
 	public void reduirePeuJouer() {
 		this.peuJouer--;
 	}
 
-	
+	/**
+	 * Controle si le serviteur a possibilite d'attaquer
+	 * @return true si il peut attaquer au moins encore 1 fois
+	 */
 	public boolean peutAttaquer() {
 		if (this.getPeuJouer()<1) return false;
 		return true;
 	}
 	
+	/**
+	 * retourne les points de vie du serviteur
+	 * @return les points de vie
+	 */
 	public int getPointDeVie() {
 		return this.pointDeVie;
 	}
@@ -132,6 +150,9 @@ public class Serviteur extends Carte {
 		return res;
 	}
 
+	/**
+	 * Augmente le nombre d'attaque disponible de 1
+	 */
 	public void AugmenterPeutJouer() {
 		this.peuJouer+=1;
 	}

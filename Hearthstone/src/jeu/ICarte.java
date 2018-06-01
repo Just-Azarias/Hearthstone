@@ -14,11 +14,6 @@ package jeu;
  */
 public interface ICarte extends Cloneable {
         
-         String getNom();                                // Une carte doit avoir un nom
-         int getCout();                          // Une carte coûte un certain nombre de mana
-         IJoueur getProprietaire();      // Une carte appartient à un joueur
-         ICapacite getCapacite();			//Une carte a forcément une capacite, null sinon
-        
          /**
          * Une carte peut avoir un effet au début de chaque tour où elle est en jeu
          * @param cible ce parametre peut être null si la carte n'a pas besoin d'une cible pour l'effet en question. 
@@ -65,4 +60,28 @@ public interface ICarte extends Cloneable {
          * @return true si la carte est foutu (un serviteur tué, un sort lancé, etc.)
          */
         boolean disparait();
+        
+        /**
+         * Retourne le nom de la capacite
+         * @return Nom de la capacite
+         */
+        String getNom();
+        
+        /**
+         * Retourne le cout en mana d'une carte
+         * @return le cout en mana de la carte
+         */
+        int getCout();   
+        
+        /**
+         * Retourne le proprietaire de la carte
+         * @return le propriétaire (IJoueur)
+         */
+        IJoueur getProprietaire();      
+        
+        /**
+         * Retourne la capacite de la carte
+         * @return la capacite (ICapacite)
+         */
+        ICapacite getCapacite();			
 }
