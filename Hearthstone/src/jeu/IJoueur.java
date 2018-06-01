@@ -236,6 +236,11 @@ public interface IJoueur {
 	 */
 	void setStockMana(int i);
 
+	/**
+	 * Modifier le Mana Max qui s'incrémente chaque tour
+	 * @param i
+	 * 		le nouveau Mana
+	 */
 	void setMana(int i);
 
 }
