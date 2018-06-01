@@ -267,12 +267,12 @@ public class Joueur implements IJoueur {
 
 	//setter
 	
-	public void setStockMana(int i) { ////////normalement en private (test)
+	public void setStockMana(int i) {
 		this.stockMana=i;
 	}
 
  
-	public void setMana(int i) {        //////sont normalement en private
+	public void setMana(int i) {
 		this.mana=i;
 	}
 

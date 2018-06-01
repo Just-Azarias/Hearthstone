@@ -230,6 +230,20 @@ public interface IJoueur {
 	boolean isProvocation();
 	
 	/**
+	 * Modifier le heros
+	 * @param heros
+	 * 			Heros à ajouter
+	 */
+	void setHeros(Heros heros);
+	
+	/**
+	 * Modifier le Pseudo
+	 * @param pseudo
+	 * 			Pseudo à ajouter
+	 */
+	void setPseudo(String pseudo);
+	
+	/**
 	 * Modifier le stock de Mana courant
 	 * @param i
 	 * 		Le nouveau stock de mana

@@ -52,4 +52,17 @@ public interface ICapacite{
 	 * @return Une chaine de caractères
 	 */
 	public String getNom();
+	
+	/**
+	 * Si le pouvoir Heroique est disponible à l'utilisation
+	 * @return True si disponible
+	 */
+	boolean isDisponible();
+	
+	/**
+	 * Modifier le statut de la capacite Heroique
+	 * @param dispo
+	 * 			Nouveau statut
+	 */
+	void setUsed(boolean dispo);
 }
