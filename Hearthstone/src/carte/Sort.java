@@ -4,7 +4,7 @@ import jeu.*;
 import plateau.Plateau;
 
 /**
-*Cette classe définit une carte avec uniquement un sort étant une capacité
+*Cette classe definit une carte avec uniquement un sort étant une capacité
 *@author Badr Matthieu
 */
 public class Sort extends Carte {

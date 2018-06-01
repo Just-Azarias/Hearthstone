@@ -2,7 +2,7 @@ package carte;
 
 import jeu.*;
 
-/**
+/** Classe abstraite d'une carte
 *
 *@author Badr Matthieu
 */
