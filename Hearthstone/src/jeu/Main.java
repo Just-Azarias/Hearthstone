@@ -27,29 +27,31 @@ public class Main {
 		choixStr=recup.nextLine();
 		ICarte carte= Plateau.getInstance().getJoueurCourant().getCarteEnMain(choixStr);
 		System.out.println(carte);
-		if (carte.getCapacite() instanceof AttaqueCible) {
-			do{
-				System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
-				choixStr=recup.nextLine();
-				caracChoix = choixStr.charAt(0);
-			}while(caracChoix!='1'&&caracChoix!='2');
-			if (caracChoix=='2') {
-				System.out.println("Quel cible? (Donne un bout de son nom)");
-				choixStr2=recup.nextLine();
-				ICarte cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getCarteEnJeu(choixStr2);
-				Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
+		if (carte!=null) {
+			if (carte.getCapacite() instanceof AttaqueCible) {
+				do{
+					System.out.println("Voulez-Vous cibler :\n1.Un heros \n2.Une carte?");
+					choixStr=recup.nextLine();
+					caracChoix = choixStr.charAt(0);
+				}while(caracChoix!='1'&&caracChoix!='2');
+				if (caracChoix=='2') {
+					System.out.println("Quel cible? (Donne un bout de son nom)");
+					choixStr2=recup.nextLine();
+					ICarte cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getCarteEnJeu(choixStr2);
+					Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
+				}
+				else {
+					Heros cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getHeros();
+					Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
+					if (cible.getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
+				}
 			}
-			else {
-				Heros cible=Plateau.getInstance().getAdversaire(carte.getProprietaire()).getHeros();
-				Plateau.getInstance().getJoueurCourant().jouerCarte(carte,cible);
-				if (cible.getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
+			else Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
+			if (carte.getCapacite() instanceof AttaqueHeros) {
+				Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
+				IJoueur adversaire = Plateau.getInstance().getAdversaire(carte.getProprietaire());
+				if (adversaire.getHeros().getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
 			}
-		}
-		else Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
-		if (carte.getCapacite() instanceof AttaqueHeros) {
-			Plateau.getInstance().getJoueurCourant().jouerCarte(carte);
-			IJoueur adversaire = Plateau.getInstance().getAdversaire(carte.getProprietaire());
-			if (adversaire.getHeros().getPointDeVie()<=0) Plateau.getInstance().gagnePartie(carte.getProprietaire());
 		}
 	}
 	
@@ -207,10 +209,11 @@ public class Main {
 		////////////////////Début de la partie////////////////////////////////////////
 		Plateau.getInstance().demarrerPartie();
 		while (Plateau.getInstance().estDemarree()) {
-			sauterLigne(8);
+			sauterLigne(15);
 			afficherPlateau();
 			jouer();
 			i--;
+			
 		}
 		
 	}

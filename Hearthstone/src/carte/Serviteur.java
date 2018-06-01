@@ -126,8 +126,8 @@ public class Serviteur extends Carte {
 
 	public String toString() {
 		String res;
-		res= "\n##[[Serviteur] " +super.toString() + " --> "+ getPointDeVie()+" PV/ "+getPointAttaque();
-		if (this.getCapacite()!=null) res+= "-->"+this.getCapacite();
+		res= "\n##[[Serviteur] " +super.toString() + " --> ["+ getPointDeVie()+" PV / "+getPointAttaque()+" ATK]";
+		if (this.getCapacite()!=null) res+= " --> "+this.getCapacite();
 		res+="]";
 		return res;
 	}
