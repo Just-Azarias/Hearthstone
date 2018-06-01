@@ -225,7 +225,7 @@ public interface IJoueur {
 
 	/**
 	 * Si un serviteur avec provocation est présent sur le terrain
-	 * @return
+	 * @return 
 	 */
 	boolean isProvocation();
 	
